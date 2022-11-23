@@ -1,0 +1,18 @@
+.eh-background {
+  /* background-image: url("../../public/images/prismatic.jpg"); */
+  height: 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.eh-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.eh-trim {
+  width: fit-content;
+}
