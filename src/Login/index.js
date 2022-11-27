@@ -1,23 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Signin from "./signin";
 import Signup from "./signup";
-import chooseBackground from "../background";
 
 const LoginComponent = () => {
-  const currentBackground = chooseBackground();
-  let isLogin = true;
+  const [isLogin, setLogin] = useState(true);
   return(
     <div>
       <div className="eh-center w-100 eh-background" style={{
-        backgroundImage: `url("/images/${currentBackground.image}")`
+        backgroundImage: `url("/images/canyonlands.jpg")`
       }}>
-        <div className="w-50">
+        <div className="w-50 h-75 overflow-auto">
           <div>
             <ul className="nav nav-tabs">
-              <li className="nav-item">
+              <li className="nav-item" onClick={() => setLogin(true)}>
                 <div className={`nav-link text-dark ${isLogin ? "active border-white" : "bg-secondary"}`}>Login</div>
               </li>
-              <li className="nav-item">
+              <li className="nav-item" onClick={() => setLogin(false)}>
                 <div className={`nav-link text-dark ${!isLogin ? "active border-white" : "bg-secondary"}`}>Sign up</div>
               </li>
             </ul>
