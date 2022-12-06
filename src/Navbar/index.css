@@ -1,4 +1,5 @@
 .eh-navbar-background
 {
-  background: rgba(236, 236, 236, 0.90) !important;
+  background: rgba(236, 236, 236, 0.70) !important;
+  backdrop-filter: blur(7px);
 }
