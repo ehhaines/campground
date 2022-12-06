@@ -7,7 +7,7 @@ import "./index.css";
 
 const NavbarComponent = () => {
   return(
-    <nav className="navbar navbar-expand navbar-light eh-navbar-background">
+    <nav className="navbar fixed-top navbar-expand navbar-light eh-navbar-background">
       <div className="container-fluid">
         <div className="d-flex flex-grow-1">
             <a className="navbar-brand d-inline-block ms-3" href="/"> <FontAwesomeIcon icon={faTents}/> Campground </a>
