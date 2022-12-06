@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import SearchComponent from "./Search";
 import LoginComponent from "./Login";
 import NavbarComponent from "./Navbar";
 import ProfileComponent from "./Profile";
+import NpsSearch from "./nps/nps-search";
+import npsReducer from "./nps/nps-reducer";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import "./App.css";
-import npsReducer from "./nps/nps-reducer";
 
 const store = configureStore({
   reducer: {
@@ -20,9 +20,9 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <NavbarComponent/>
-        <div className="m-0 p-0" style={{"position": "relative"}}>
+        <div className="m-0 p-0">
           <Routes>
-            <Route path="/search" element={<SearchComponent/>}/>
+            <Route path="/search" element={<NpsSearch/>}/>
             <Route path="/login" element={<LoginComponent/>}/>
             <Route path="/profile" element={<ProfileComponent/>}/>
           </Routes>
