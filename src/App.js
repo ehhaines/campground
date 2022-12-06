@@ -1,13 +1,21 @@
 import SearchComponent from "./Search";
 import LoginComponent from "./Login";
+import NavbarComponent from "./Navbar";
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router";
 import "./App.css";
 
 function App() {
   return (
-    <div className="m-0 p-0">
-      {/* <SearchComponent/> */}
-      <LoginComponent/>
-    </div>
+    <BrowserRouter>
+    <NavbarComponent/>
+      <div className="m-0 p-0">
+        <Routes>
+          <Route path="/*" element={<SearchComponent/>}/>
+          <Route path="/login" element={<LoginComponent/>}/>
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

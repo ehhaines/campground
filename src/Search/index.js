@@ -7,7 +7,9 @@ const SearchComponent = () => {
   const currentBackground = chooseBackground();
   return(
     <div className="eh-center w-100 eh-background" style={{
-      backgroundImage: `url("/images/${currentBackground.image}")`
+      backgroundImage: `linear-gradient(to bottom, rgba(226, 229, 224, 0.3), rgba(226, 229, 224, 0.3)),
+      url('images/${currentBackground.image}')`
+      // backgroundImage: `url("/images/${currentBackground.image}")`
     }}>
       <div className='w-50'>
         <SearchBar/>
