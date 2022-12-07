@@ -3,6 +3,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 700px;
 }
 
 .eh-center {
@@ -14,4 +15,10 @@
 
 .eh-trim {
   width: fit-content;
+}
+
+.eh-button:hover {
+  background: gray !important;
+  color: white;
+  transition: 0.3s;
 }

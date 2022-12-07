@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import LoginComponent from "./Login";
 import NavbarComponent from "./Navbar";
 import ProfileComponent from "./Profile";
-import NpsSearch from "./nps/nps-search";
+import NpsSearch from "./nps/Search/nps-search";
 import npsReducer from "./nps/nps-reducer";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
@@ -17,7 +17,7 @@ const store = configureStore({
 
 function App() {
   return (
-    <Provider store={store}>
+    <Provider store={store} >
       <BrowserRouter>
         <NavbarComponent/>
         <div className="m-0 p-0">
