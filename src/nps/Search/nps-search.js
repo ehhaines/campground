@@ -15,7 +15,7 @@ const NpsSearch = () => {
   const dispatch = useDispatch();
 
   return(
-    <div className="eh-offset">
+    <div>
       <div className="form-group eh-center w-100 eh-background" style={{
         backgroundImage: `linear-gradient(to bottom, rgba(226, 229, 224, 0.3), rgba(226, 229, 224, 0.3)),
         url('images/hallet.jpg')`}}>
