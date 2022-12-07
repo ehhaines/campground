@@ -1,40 +1,28 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTents } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import "./index.css";
 
 const NavbarComponent = () => {
   return(
-    <nav className="navbar navbar-expand-lg navbar-light container">
-      <a className="navbar-brand" href="#">Campground</a>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
+    <nav className="navbar fixed-top navbar-expand navbar-light eh-navbar-background">
+      <div className="container-fluid">
+        <div className="d-flex flex-grow-1">
+            <a className="navbar-brand d-inline-block ms-3" href="/"> <FontAwesomeIcon icon={faTents}/> Campground </a>
+        </div>
+        <div className="collapse navbar-collapse flex-grow-1 text-right me-2" id="myNavbar">
+            <ul className="navbar-nav ms-auto flex-nowrap">
+                <li className="nav-item">
+                    <a href="/search" className="nav-link m-2 menu-item nav-active"><FontAwesomeIcon icon={faMagnifyingGlass} size="lg"/> Search</a>
+                </li>
+                <li className="nav-item">
+                    <a href="/profile" className="nav-link m-2 menu-item"><FontAwesomeIcon icon={faUser} size="lg"/> Profile</a>
+                </li>
 
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Link</a>
-          </li>
-          <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">Action</a>
-              <a className="dropdown-item" href="#">Another action</a>
-              <div className="dropdown-divider"></div>
-              <a className="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
-        <form className="form-inline my-2 my-lg-0">
-          <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-          <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+            </ul>
+        </div>
       </div>
     </nav>
   );

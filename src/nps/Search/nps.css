@@ -1,0 +1,36 @@
+.eh-background {
+  height: 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 700px;
+}
+
+.eh-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.eh-trim {
+  width: fit-content;
+}
+
+.eh-button:hover {
+  background: gray !important;
+  color: white;
+  transition: 0.3s;
+}
+
+@media screen and (min-width: 577px) {
+  .eh-sizing {
+    width: 75%;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .eh-sizing {
+    width: 50%;
+  }
+}
