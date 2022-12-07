@@ -5,6 +5,7 @@ import ResultList from "./result-list";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import "./nps.css";
+import LoadSVG from "./Spin-1s-200px.svg"
 
 const NpsSearch = () => {
 
@@ -31,7 +32,10 @@ const NpsSearch = () => {
         }}
         value={searchTerm} placeholder="Search for a national park"></input>}
         {isSearchResults && <div>
-          {loading && <span>Loading...</span>}
+          {loading &&
+          <div>
+            <img src={LoadSVG} alt="Your SVG" />
+          </div>}
           {!loading && 
           <div className="position-relative overflow-auto rounded">
             <button className="bg-transparent border-0 position-absolute top-0 end-0 eh-button rounded-circle" style={{"zIndex": 3}}

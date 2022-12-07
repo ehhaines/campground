@@ -3,7 +3,7 @@ import "./result.css";
 
 const ResultItem = ({park}) => {
   return(
-    <a className="list-group-item" href="#">
+    <a className="list-group-item" href={`/details/${park.parkCode}`}>
       <div className="row">
         <div className="col-3">
           <img src={park.images[0].url} alt={park.parkCode} width="80px" height="80px" className="rounded"/>
