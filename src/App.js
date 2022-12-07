@@ -8,6 +8,7 @@ import npsReducer from "./nps/nps-reducer";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import "./App.css";
+import HomeComponent from "./Home";
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ function App() {
         <NavbarComponent/>
         <div className="m-0 p-0">
           <Routes>
+            <Route path="/*" element={<HomeComponent/>}/>
             <Route path="/search" element={<NpsSearch/>}/>
             <Route path="/login" element={<LoginComponent/>}/>
             <Route path="/profile" element={<ProfileComponent/>}/>
