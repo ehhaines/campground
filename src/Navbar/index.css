@@ -3,3 +3,9 @@
   background: rgba(236, 236, 236, 0.70) !important;
   backdrop-filter: blur(7px);
 }
+
+@media screen and (max-width: 500px) {
+  .eh-visibility {
+    display: none;
+  }
+}
