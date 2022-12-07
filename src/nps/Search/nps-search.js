@@ -34,7 +34,7 @@ const NpsSearch = () => {
         {isSearchResults && <div>
           {loading &&
           <div>
-            <img src={LoadSVG} alt="Your SVG" />
+            <img src={LoadSVG} alt="...Loading..." />
           </div>}
           {!loading && 
           <div className="position-relative overflow-auto rounded">
