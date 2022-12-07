@@ -20,7 +20,7 @@ const NpsSearch = () => {
         backgroundImage: `linear-gradient(to bottom, rgba(226, 229, 224, 0.3), rgba(226, 229, 224, 0.3)),
         url('images/hallet.jpg')`}}>
         {!isSearchResults &&
-        <input className="form-control form-control-lg w-50"
+        <input className="form-control form-control-lg eh-sizing"
         onChange={(e) => {
           setSearchTerm(e.target.value);
         }} 
@@ -31,9 +31,9 @@ const NpsSearch = () => {
           }
         }}
         value={searchTerm} placeholder="Search for a national park"></input>}
-        {isSearchResults && <div>
+        {isSearchResults && <div className="eh-sizing">
           {loading &&
-          <div>
+          <div className="text-center">
             <img src={LoadSVG} alt="...Loading..." />
           </div>}
           {!loading && 
@@ -48,7 +48,7 @@ const NpsSearch = () => {
             {parks && <ResultList className="position-absolute"/>}
             {parks.length === 0 && <div className="bg-light container border-rounded p-3">
               <h2 className="mt-3">Uh Oh!</h2>
-              <p className="mb-3">We couldn't find any national parks that matched your query! Please try again...(tips: make sure your query uses complete words and is spelled correctly)</p>
+              <p className="mb-3">We couldn't find any national parks that matched your query! Please revise your search and try again...(tips: make sure your query uses complete words and is spelled correctly)</p>
             </div>}
           </div>}
         </div>}
