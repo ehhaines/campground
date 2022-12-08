@@ -72,7 +72,7 @@ const ParkComponent = () => {
           </div>
         </div>
       </div>
-      <img className="w-100" src="/images/mountain.png" alt=""/>
+      <img className="w-100" src="/images/mountain2.png" alt=""/>
     </div>
   );
 }
