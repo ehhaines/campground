@@ -10,8 +10,9 @@ const profile = {
     dateOfBirth : '01/01/2022',
     numOfTrips: 8,
     dateJoined: '10/2022',
-    tripsPlanned: 'a',
-    friends: 'b'
+    tripsPlanned: 'trip1, trip2, trip3',
+    favoriteParks: 'Yellowstone, Shenandoah',
+    friendsList: 'Tom, John, Bob'
 }
 
 const profileSlice = createSlice({

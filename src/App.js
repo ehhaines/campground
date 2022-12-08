@@ -4,14 +4,17 @@ import SearchComponent from "./Search";
 import LoginComponent from "./Login";
 import NavbarComponent from "./Navbar";
 import ProfileComponent from "./Profile";
+import EditProfile from "./edit-profile";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import "./App.css";
 import npsReducer from "./nps/nps-reducer";
+import profileReducer from "./reducers/profile-reducer";
 
 const store = configureStore({
   reducer: {
-    nps: npsReducer
+    nps: npsReducer,
+    profile: profileReducer
   }
 })
 
@@ -25,6 +28,7 @@ function App() {
             <Route path="/search" element={<SearchComponent/>}/>
             <Route path="/login" element={<LoginComponent/>}/>
             <Route path="/profile" element={<ProfileComponent/>}/>
+            <Route path="/edit-profile" element={<EditProfile/>}/>
           </Routes>
         </div>
       </BrowserRouter>

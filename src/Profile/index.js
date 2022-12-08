@@ -17,7 +17,7 @@ const ProfileComponent = () => {
                 </Link>
 
                 <div className="ms-5">
-                    <h3 className="fw-bold m-0">username</h3>
+                    <h3 className="fw-bold m-0">{profile.username}</h3>
                 </div>
             </div>
         </div>
@@ -41,26 +41,29 @@ const ProfileComponent = () => {
 
 
         <div>
-            <h3 className="m-0 fw-bold">username</h3>
-            <p className="m-0 text-secondary">email</p>
-            <p className="m-0 text-secondary">phone</p>
-            <p className="m-0 text-secondary">birthday</p>
+            <h3 className="m-0 fw-bold">{profile.username}</h3>
+            <p className="m-0 text-secondary">{profile.email}</p>
+            <p className="m-0 text-secondary">{profile.phone}</p>
+            <p className="m-0 text-secondary">{profile.dateOfBirth}</p>
             <br></br>
             <div className="text-secondary pb-2">
-                <i className="bi bi-geo-alt"></i>location
-                <i className="bi bi-calendar ms-2"></i>dateJoined
-                <i className="bi bi-balloon ms-2"></i>numOfTrips
+                <i className="bi bi-geo-alt"></i>{profile.location}
+                <i className="bi bi-calendar ms-2"></i>{profile.dateJoined}
+                <i className="bi bi-balloon ms-2"></i>{profile.numOfTrips}
             </div>
+            <br></br>
             <div>
-                <span className="fw-bold">parkList </span>
+                <span className="fw-bold">Favorite Parks</span>
                 <br></br>
+                <span className="text-secondary">{profile.favoriteParks}</span>
+                <br></br><br></br>
+                <span className="fw-bold">TripsPlanned</span>
                 <br></br>
-                <span className="fw-bold">tripsPlanned</span>
+                <span className="text-secondary">{profile.tripsPlanned}</span>
+                <br></br><br></br>
+                <span className='fw-bold'>Friends</span>
                 <br></br>
-                <br></br>
-                <span className='fw-bold'>friendList </span>
-                <br></br>
-                <span className="text-secondary">friends</span>
+                <span className="text-secondary">{profile.friendsList}</span>
             </div>
         </div>
     </div>
