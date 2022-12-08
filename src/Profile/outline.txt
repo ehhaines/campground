@@ -1,0 +1,11 @@
+-- Picture
+-- Username
+-- Date Joined
+-- Num trips
+-- Bio
+
+Features:
+
+-- Bucket List (List of all parks that user wants to visit)
+-- Upcoming and Completed trips (one to many)
+-- Friends (many to many)
