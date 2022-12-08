@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { findParksBySearchTermThunk } from "../nps-thunk";
 import ResultList from "./result-list";
@@ -13,6 +13,10 @@ const NpsSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const {parks, loading} = useSelector((state) => state.nps)
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(findParksBySearchTermThunk(searchTerm))
+  }, []);
 
   return(
     <div>

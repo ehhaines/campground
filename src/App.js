@@ -10,6 +10,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import "./App.css";
 import HomeComponent from "./Home";
+import ParkComponent from "./Park";
 
 const store = configureStore({
   reducer: {
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/*" element={<HomeComponent/>}/>
             <Route path="/search" element={<NpsSearch/>}/>
+            <Route path="/details/:park" element={<ParkComponent/>}/>
             <Route path="/login" element={<LoginComponent/>}/>
             <Route path="/profile" element={<ProfileComponent/>}/>
           </Routes>
