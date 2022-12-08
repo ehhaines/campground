@@ -10,8 +10,8 @@ const Signin = () => {
     const dispatch = useDispatch()
     const handleLoginBtn = () => {
         setError(null)
-        const loginUser = {email: username, password}
-        //dispatch()
+        const loginUser = {username, password}
+        dispatch(loginThunk(loginUser))
     }
   return(
     <div className="bg-white rounded-bottom">
@@ -33,6 +33,16 @@ const Signin = () => {
       >
           Enter
       </button>
+        {
+            error &&
+            <div className="alert alert-danger">
+                {error}
+            </div>
+        }
+        {
+            currentUser &&
+            <h2>Welcome {currentUser.username}</h2>
+        }
     </div>
   );
 }
