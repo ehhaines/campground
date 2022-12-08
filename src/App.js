@@ -5,6 +5,7 @@ import NavbarComponent from "./Navbar";
 import ProfileComponent from "./Profile";
 import NpsSearch from "./nps/Search/nps-search";
 import npsReducer from "./nps/nps-reducer";
+import usersReducer from "./Profile/users-reducer";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import "./App.css";
@@ -12,7 +13,8 @@ import HomeComponent from "./Home";
 
 const store = configureStore({
   reducer: {
-    nps: npsReducer
+    nps: npsReducer,
+    users: usersReducer
   }
 })
 
