@@ -3,29 +3,30 @@ import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {updateProfile} from "../reducers/profile-reducer";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'font-awesome/css/font-awesome.min.css';
+import "../Profile/profile.css";
 
 const EditProfile = () => {
     const navigate = useNavigate();
     const profile = useSelector(state => state.profile);
     const dispatch = useDispatch();
 
-    const [name, setName] = useState(profile.firstName + ' ' + profile.lastName);
-    const [bio, setBio] = useState(profile.bio);
+    const [name, setName] = useState(profile.username);
+    const [email, setEmail] = useState(profile.email);
+    const [phone, setPhone] = useState(profile.phone);
     const [location, setLocation] = useState(profile.location);
-    const [website, setWebsite] = useState(profile.website);
     const birthdayData = profile.dateOfBirth.split('/')
     const [birthday, setBirthday] = useState(birthdayData[2] + "-" + birthdayData[0] + '-' + birthdayData[1]);
 
     const updateProfileHandler = () => {
-        //call dispatch
-        dispatch(updateProfile({name, bio, location, website, birthday}));
-        //change route
-        navigate('/tuiter/profile');
+        dispatch(updateProfile({name, email, phone, location, birthday}));
+        navigate('/profile');
     }
     return (
-        <>
-            <Link to="/tuiter/profile">
+        <div className="margin-top">
+            <Link to="/profile">
                 <i className="bi bi-x fs-4 text-black"></i>
             </Link>
 
@@ -48,7 +49,7 @@ const EditProfile = () => {
                 <div className="row">
                     <div className="col-4">
                         <img className="position-relative rounded-circle" style={{left: 20, top: -50, "opacity": "0.7"}} width="100px" height="100px" src="/images/yellowstone1.png" alt="..."/>
-                        <i className="position-absolute fa fa-rgular fa-camera fa-2x"
+                        <i className="position-absolute fa fa-regular fa-camera fa-2x"
                            style={{left: "8%", bottom: "23%", "opacity": "0.8"}}></i>
                     </div>
                     <div className="col-8"></div>
@@ -63,23 +64,14 @@ const EditProfile = () => {
                         setName(e.target.value)
                     }}/>
                 </div>
-                <div className="form-group pt-4">
-                    <label htmlFor="inputBio">Bio</label>
-                    <textarea className="form-control" id="inputBio" placeholder="Bio"
-                              value={bio} onChange={(e) => setBio(e.target.value)}
-                    />
-                </div>
+
                 <div className="form-group pt-4">
                     <label htmlFor="inputLocation">Location</label>
                     <input type="text" className="form-control" id="inputLocation" placeholder="Location"
                            value={location} onChange={(e) => setLocation(e.target.value)}
                     />
                 </div>
-                <div className="form-group pt-4">
-                    <input type="text" className="form-control" id="inputWebsite" placeholder="Website"
-                           value={website} onChange={(e) => setWebsite(e.target.value)}
-                    />
-                </div>
+
                 <div className="form-group pt-4">
                     <label htmlFor="inputBirthday">Birth date</label>
                     <input type="date" className="form-control" id="inputBirthday" placeholder="Location"
@@ -91,9 +83,12 @@ const EditProfile = () => {
             <div className="mt-4">
                 <i className="bi bi-arrow-right-short float-end fs-4"></i>
                 <p>Switch to professional</p>
+                <Link to="/profile/professional">
+                    <i className="bi bi-x fs-4 text-black"></i>
+                </Link>
             </div>
 
-        </>
+        </div>
     )
 }
 

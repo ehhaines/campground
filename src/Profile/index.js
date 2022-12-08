@@ -1,10 +1,10 @@
 import React from "react";
 import "./profile.css";
-// import {useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 
 const ProfileComponent = () => {
-    // const profile = useSelector(state => state.profile);
+    const profile = useSelector(state => state.profile);
 
   return(
 
@@ -17,7 +17,7 @@ const ProfileComponent = () => {
                 </Link>
 
                 <div className="ms-5">
-                    <h3 className="fw-bold m-0">Username</h3>
+                    <h3 className="fw-bold m-0">username</h3>
                 </div>
             </div>
         </div>
@@ -41,9 +41,10 @@ const ProfileComponent = () => {
 
 
         <div>
-            <h3 className="m-0 fw-bold">Username</h3>
-            <p className="m-0 text-secondary">email address</p>
-            <p className="m-0 text-secondary">phone number</p>
+            <h3 className="m-0 fw-bold">username</h3>
+            <p className="m-0 text-secondary">email</p>
+            <p className="m-0 text-secondary">phone</p>
+            <p className="m-0 text-secondary">birthday</p>
             <br></br>
             <div className="text-secondary pb-2">
                 <i className="bi bi-geo-alt"></i>location

@@ -1,17 +1,17 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const profile = {
-    firstName: 'Steve',
-    lastName: 'B',
+    username: 'Steve',
     profilePicture: 'yellowstong1.png',
     bannerPicture: 'route1.jpg',
-    bio: 'Software Engineer, Music, Travel',
-    website: 'youtube.com/webdevtv',
+    email: 'sample@gmail.com',
+    phone: 6043123123,
     location: 'Sunnyvale, CA',
     dateOfBirth : '01/01/2022',
+    numOfTrips: 8,
     dateJoined: '10/2022',
-    followingList: 'a',
-    followersList: 'b'
+    tripsPlanned: 'a',
+    friends: 'b'
 }
 
 const profileSlice = createSlice({
@@ -20,14 +20,13 @@ const profileSlice = createSlice({
     reducers: {
         updateProfile(state, action) {
             const updatedProfile = action.payload;
-            let [firstName, ...lastName] = updatedProfile.name.split('/');
-            lastName = lastName.join(' ');
-            const bio = updatedProfile.bio;
+            let [username] = updatedProfile.username;
+            const email = updatedProfile.email;
+            const phone = updatedProfile.phone;
             const location = updatedProfile.location;
-            const website = updatedProfile.website;
             const [year, month, day] = updatedProfile.birthday.split('-');
             const dateOfBirth = [month, day, year].join('/');
-            return {...state, firstName, lastName, bio, location, website, dateOfBirth}
+            return {...state, username, email, phone, location, dateOfBirth}
         }
     }
 });
