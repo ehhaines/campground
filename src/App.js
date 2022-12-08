@@ -10,10 +10,12 @@ import { Routes, Route } from "react-router";
 import "./App.css";
 import HomeComponent from "./Home";
 import ParkComponent from "./Park";
+import parksReducer from "./Park/parks-reducer";
 
 const store = configureStore({
   reducer: {
-    nps: npsReducer
+    nps: npsReducer,
+    parks: parksReducer
   }
 })
 

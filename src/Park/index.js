@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import "../offset.css";
 import "./index.css";
+import { useDispatch, useSelector } from "react-redux";
+import { findParkByCodeThunk } from "./parks-thunks";
 
 const park_sample = {
   fullName: "Acadia National Park",
@@ -36,43 +38,48 @@ const calculateG = () => {
 }
 
 const ParkComponent = () => {
-  // const params = useParams();
-  // const thisPark = params.park;
+
+  const params = useParams();
+  const thisPark = params.park;
+
+  const {currentPark, loading} = useSelector((state) => state.parks);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(findParkByCodeThunk(thisPark))
+  }, []);
+
   return(
     <div className="eh-offset">
-      <div className="container">
-        <div className="row my-3">
-          <div className="col-4 text-center text-dark">
-            <div className="eh-sticky">
-              <img className="w-75 rounded mb-3" src={park_sample.image} alt=""/>
-              <div className="display-6 mb-1">{park_sample.fullName}</div>
-              {park_sample.statesSpanned.split(",").length > 1 &&
-                <div className="text-secondary">Multiple states: {park_sample.statesSpanned}</div>
-              }
-              {park_sample.statesSpanned.split(",").length === 1 &&
-                <div className="text-secondary"><FontAwesomeIcon icon={faLocationDot}/> {park_sample.city}, {park_sample.state}</div>
-              }
-              <div className="h4 mt-3"><span style={
-                {"color": `rgb(${calculateR()}, ${calculateG()}, 0)`}
-              }>{rating_sample}</span> / 10</div>
+      {!loading && <div>
+        <div className="container">
+          <div className="row my-3">
+            <div className="col-4 text-center text-dark">
+              <div className="eh-sticky">
+                <img className="w-75 rounded mb-3" src={currentPark.image} alt=""/>
+                <div className="display-6 mb-1">{currentPark.fullName}</div>
+                <div className="text-secondary"><FontAwesomeIcon icon={faLocationDot}/> Location: {currentPark.statesSpanned}</div>
+                <div className="h4 mt-3"><span style={
+                  {"color": `rgb(${calculateR()}, ${calculateG()}, 0)`}
+                }>{rating_sample}</span> / 10</div>
+              </div>
+            </div>
+            <div className="col text-secondary mb-3 pb-3">
+              <div className="text-dark h5">Description:</div>
+              <div>{currentPark.description}</div>
+              <br></br><br></br>
+              <div className="text-dark h5">Weather:</div>
+              <div>{currentPark.weather}</div>
+              <br></br><br></br>
+              <div className="text-dark h5">Your friends are visiting {currentPark.shortName}... Plan <i>your</i> trip next!</div>
+              <div>Placeholder for images of all of user's friends who have visited this park.</div>
+              <br></br><br></br>
+              <div className="text-dark h5">Reviews:</div>
+              <div>Placeholder for reviews of this park.</div>
             </div>
           </div>
-          <div className="col text-secondary mb-3 pb-3">
-            <div className="text-dark h5">Description:</div>
-            <div>{park_sample.description}</div>
-            <br></br><br></br>
-            <div className="text-dark h5">Weather:</div>
-            <div>{park_sample.weather}</div>
-            <br></br><br></br>
-            <div className="text-dark h5">Your friends are visiting {park_sample.shortName}... Plan <i>your</i> trip next!</div>
-            <div>Placeholder for images of all of user's friends who have visited this park.</div>
-            <br></br><br></br>
-            <div className="text-dark h5">Reviews:</div>
-            <div>Placeholder for reviews of this park.</div>
-          </div>
         </div>
-      </div>
-      <img className="w-100" src="/images/mountain2.png" alt=""/>
+        <img className="w-100" src="/images/mountain2.png" alt=""/>
+      </div>}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { findParkByCodeThunk } from "./parks-thunks";
 
 const initialState = {
-  currentPark: null,
+  currentPark: {},
   loading: false
 }
 
