@@ -18,7 +18,7 @@ import parksReducer from "./Park/parks-reducer";
 const store = configureStore({
   reducer: {
     nps: npsReducer,
-    parks: parksReducer
+    parks: parksReducer,
     users: usersReducer,
     profile: profileReducer
   }
