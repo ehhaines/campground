@@ -12,13 +12,12 @@ const ProfileComponent = () => {
             <div className="row">
                 <div className="col">
                     <div>
-                        <Link to="/">
-                            <div className="float-start"><i className="bi bi-arrow-left-short fs-4 text-black"></i></div>
-                        </Link>
-
-                        <div className="ms-5">
-                            <h3 className="fw-bold m-0">{profile.username}</h3>
+                        <div className="float-start">
+                            <h3 className="fw-bold">{profile.username}</h3>
                         </div>
+                        <Link to="/">
+                            <div className="float-end"><i className="bi bi-arrow-left-short fs-4 text-black">Log out</i></div>
+                        </Link>
                     </div>
                 </div>
             </div>
