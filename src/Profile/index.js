@@ -1,10 +1,15 @@
 import React from "react";
 import "./profile.css";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+import {logoutThunk} from "./users-thunks";
 
 const ProfileComponent = () => {
     const profile = useSelector(state => state.profile);
+    const dispatch = useDispatch();
+    const handleLogout = () => {
+        dispatch(logoutThunk())
+    }
 
     return(
 
@@ -16,7 +21,9 @@ const ProfileComponent = () => {
                             <h3 className="fw-bold">{profile.username}</h3>
                         </div>
                         <Link to="/">
-                            <div className="float-end"><i className="bi bi-arrow-left-short fs-4 text-black">Log out</i></div>
+                            <button className="float-end btn" onClick={handleLogout}>
+                                <i className="bi bi-arrow-left-short fs-4 text-black">Log out</i>
+                            </button>
                         </Link>
                     </div>
                 </div>

@@ -2,26 +2,27 @@ import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {updateProfile} from "../reducers/profile-reducer";
+import {profileThunk} from "../Profile/users-thunks";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'font-awesome/css/font-awesome.min.css';
+
 import "../Profile/profile.css";
 
 const EditProfile = () => {
     const navigate = useNavigate();
-    const profile = useSelector(state => state.profile);
+    const {currentUser} = useSelector(state => state.user);
     const dispatch = useDispatch();
 
-    const [name, setName] = useState(profile.username);
-    const [email, setEmail] = useState(profile.email);
-    const [phone, setPhone] = useState(profile.phone);
-    const [location, setLocation] = useState(profile.location);
-    const birthdayData = profile.dateOfBirth.split('/')
+    const [name, setName] = useState(currentUser.username);
+    const [email, setEmail] = useState(currentUser.email);
+    const [phone, setPhone] = useState(currentUser.phone);
+    const [location, setLocation] = useState(currentUser.location);
+    const birthdayData = currentUser.dateOfBirth.split('/')
     const [birthday, setBirthday] = useState(birthdayData[2] + "-" + birthdayData[0] + '-' + birthdayData[1]);
 
     const updateProfileHandler = () => {
-        dispatch(updateProfile({name, email, phone, location, birthday}));
+        // dispatch();
         navigate('/profile');
     }
     return (
