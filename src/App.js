@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import LoginComponent from "./Login";
 import NavbarComponent from "./Navbar";
 import ProfileComponent from "./Profile";
+import OthersComponent from "./Profile/others";
 import EditProfile from "./edit-profile";
 import NpsSearch from "./nps/Search/nps-search";
 import npsReducer from "./nps/nps-reducer";
@@ -37,6 +38,7 @@ function App() {
             <Route path="/login" element={<LoginComponent/>}/>
             <Route path="/profile" element={<ProfileComponent/>}/>
             <Route path="/edit-profile" element={<EditProfile/>}/>
+            <Route path="/others" element={<OthersComponent/>}/>
           </Routes>
         </div>
       </BrowserRouter>
