@@ -5,7 +5,7 @@ import ResultList from "./result-list";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import "./nps.css";
-import LoadSVG from "./Spin-1s-200px.svg"
+import LoadSVG from "../../Spin-1s-200px.svg"
 
 const NpsSearch = () => {
 
