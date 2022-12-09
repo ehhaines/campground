@@ -4,6 +4,7 @@ import Signin from "./signin";
 import Signup from "./signup";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import ProfileComponent from "../Profile";
 
 const LoginComponent = () => {
   const [isLogin, setLogin] = useState(true);
@@ -29,6 +30,7 @@ const LoginComponent = () => {
           </div>
           <div>
             {isLogin && <Signin/>}
+
             {!isLogin && <Signup/>}
           </div>
         </div>
