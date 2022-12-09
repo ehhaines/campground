@@ -14,15 +14,15 @@ const Signin = () => {
         dispatch(loginThunk(loginUser))
     }
   return(
-    <div className="bg-white rounded-bottom">
+    <div className="bg-white bg-opacity-50 rounded-bottom">
       <div>
         <div className="input-group mb-3 col">
-          <input type="text" className="form-control mx-3 mb-2 mt-3" aria-describedby="inputGroup-sizing-default" placeholder="Username"
+          <input type="text" className="form-control mx-3 mb-2 mt-3 bg-white bg-opacity-75" aria-describedby="inputGroup-sizing-default" placeholder="Username"
           value={username}
           onChange={(e) => {setUsername(e.target.value)}}/>
         </div>
         <div className="input-group mb-3 col">
-          <input type="text" className="form-control mx-3 my-2" aria-describedby="inputGroup-sizing-default" placeholder="Password"
+          <input type="text" className="form-control mx-3 my-2 bg-white bg-opacity-75" aria-describedby="inputGroup-sizing-default" placeholder="Password"
           value={password}
           onChange={(e) => {setPassword(e.target.value)}}/>
         </div>
