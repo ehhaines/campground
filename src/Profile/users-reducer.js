@@ -39,8 +39,8 @@ const usersReducer = createSlice({
             console.log(current(state))
         },
         [profileThunk.fulfilled]: (state, action) => {
-            state.currentUser = JSON.stringify(action.payload)
-            console.log("fulfilled: " + current(state))
+            state.currentUser = action.payload
+            console.log("fulfilled: " + JSON.stringify(current(state)))
         },
         [profileThunk.rejected]: (state, action) => {
             state.error = action.payload
