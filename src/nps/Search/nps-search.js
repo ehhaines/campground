@@ -16,7 +16,7 @@ const NpsSearch = () => {
 
   useEffect(() => {
     dispatch(findParksBySearchTermThunk(searchTerm))
-  }, [dispatch, searchTerm]);
+  }, []);
 
   return(
     <div>
@@ -30,6 +30,7 @@ const NpsSearch = () => {
         }} 
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
+            console.log("keypressed");
             dispatch(findParksBySearchTermThunk(searchTerm));
             setIsSearchResults(true);
           }

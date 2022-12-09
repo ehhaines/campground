@@ -4,8 +4,8 @@ import {useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {updateProfile} from "../reducers/profile-reducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import 'font-awesome/css/font-awesome.min.css';
+// import 'bootstrap-icons/font/bootstrap-icons.css';
+// import 'font-awesome/css/font-awesome.min.css';
 import "../Profile/profile.css";
 
 const EditProfile = () => {
