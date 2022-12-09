@@ -3,8 +3,11 @@ import { Provider } from "react-redux";
 import LoginComponent from "./Login";
 import NavbarComponent from "./Navbar";
 import ProfileComponent from "./Profile";
+import EditProfile from "./edit-profile";
 import NpsSearch from "./nps/Search/nps-search";
 import npsReducer from "./nps/nps-reducer";
+import usersReducer from "./Profile/users-reducer";
+import profileReducer from "./reducers/profile-reducer";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import "./App.css";
@@ -16,6 +19,8 @@ const store = configureStore({
   reducer: {
     nps: npsReducer,
     parks: parksReducer
+    users: usersReducer,
+    profile: profileReducer
   }
 })
 
@@ -31,6 +36,7 @@ function App() {
             <Route path="/details/:park" element={<ParkComponent/>}/>
             <Route path="/login" element={<LoginComponent/>}/>
             <Route path="/profile" element={<ProfileComponent/>}/>
+            <Route path="/edit-profile" element={<EditProfile/>}/>
           </Routes>
         </div>
       </BrowserRouter>

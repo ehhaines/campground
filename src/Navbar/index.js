@@ -18,7 +18,7 @@ const NavbarComponent = () => {
                     <a href="/search" className="nav-link m-2 menu-item nav-active"><FontAwesomeIcon icon={faMagnifyingGlass} size="lg"/> <span className="eh-visibility">Search</span></a>
                 </li>
                 <li className="nav-item">
-                    <a href="/profile" className="nav-link m-2 menu-item"><FontAwesomeIcon icon={faUser} size="lg"/> <span className="eh-visibility">Profile</span></a>
+                    <a href="/login" className="nav-link m-2 menu-item"><FontAwesomeIcon icon={faUser} size="lg"/> <span className="eh-visibility">Log in</span></a>
                 </li>
 
             </ul>
