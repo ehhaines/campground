@@ -1,5 +1,7 @@
 
-.eh-sticky {
-  position: sticky;
-  top: 95px;
+@media screen and (min-width: 768px){
+  .eh-sticky {
+    position: sticky;
+    top: 95px;
+  }
 }
