@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {profileThunk} from "../Profile/users-thunks";
+import {updateProfileThunk} from "../Profile/users-thunks";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -11,7 +11,7 @@ import "../Profile/profile.css";
 
 const EditProfile = () => {
     const navigate = useNavigate();
-    const {currentUser} = useSelector(state => state.user);
+    const {currentUser} = useSelector(state => state.users);
     const dispatch = useDispatch();
 
     const [name, setName] = useState(currentUser.username);
@@ -21,8 +21,8 @@ const EditProfile = () => {
     const birthdayData = currentUser.dateOfBirth.split('/')
     const [birthday, setBirthday] = useState(birthdayData[2] + "-" + birthdayData[0] + '-' + birthdayData[1]);
 
-    const updateProfileHandler = () => {
-        // dispatch();
+    const updateProfileHandler = (currentUser) => {
+        dispatch(updateProfileThunk(currentUser));
         navigate('/profile');
     }
     return (

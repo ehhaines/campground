@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./profile.css";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
@@ -7,10 +7,12 @@ import {logoutThunk} from "./users-thunks";
 const ProfileComponent = () => {
     const {currentUser} = useSelector(state => state.users);
     const dispatch = useDispatch();
+
     const handleLogout = () => {
         dispatch(logoutThunk())
     }
 
+    if (currentUser) {
     return(
 
         <div className="container margin-top">
@@ -73,7 +75,7 @@ const ProfileComponent = () => {
                 </div>
             </div>
         </div>
-    );
+    );}
 }
 
 export default ProfileComponent;

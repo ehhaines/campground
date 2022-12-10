@@ -24,3 +24,8 @@ export const logout = async () => {
     const response = await axios.post(`${BASE_URL}/logout`)
     return response.data
 }
+
+export const updateProfile = async (currentUser) => {
+    const response = await  axios.put(`${BASE_URL}/users/${currentUser._id}`, currentUser);
+    return currentUser;
+}
