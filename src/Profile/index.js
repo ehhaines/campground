@@ -1,18 +1,16 @@
-import React, {useEffect} from "react";
+import React from "react";
 import "./profile.css";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {logoutThunk} from "./users-thunks";
+// import {logoutThunk} from "./users-thunks";
 
 const ProfileComponent = () => {
-    const {currentUser} = useSelector(state => state.users);
-    const dispatch = useDispatch();
+    const profile = useSelector(state => state.profile);
+    // const dispatch = useDispatch();
+    // const handleLogout = () => {
+    //     dispatch(logoutThunk())
+    // }
 
-    const handleLogout = () => {
-        dispatch(logoutThunk())
-    }
-
-    if (currentUser) {
     return(
 
         <div className="container margin-top">
@@ -20,10 +18,10 @@ const ProfileComponent = () => {
                 <div className="col">
                     <div>
                         <div className="float-start">
-                            <h3 className="fw-bold">{currentUser.username}</h3>
+                            <h3 className="fw-bold">{profile.username}</h3>
                         </div>
                         <Link to="/">
-                            <button className="float-end btn" onClick={handleLogout}>
+                            <button className="float-end btn">
                                 <i className="bi bi-arrow-left-short fs-4 text-black">Log out</i>
                             </button>
                         </Link>
@@ -49,33 +47,33 @@ const ProfileComponent = () => {
 
 
             <div>
-                <h3 className="m-0 fw-bold">{currentUser.username}</h3>
-                <p className="m-0 text-secondary">{currentUser.email}</p>
-                <p className="m-0 text-secondary">{currentUser.phone}</p>
-                <p className="m-0 text-secondary">{currentUser.dateOfBirth}</p>
+                <h3 className="m-0 fw-bold">{profile.username}</h3>
+                <p className="m-0 text-secondary">{profile.email}</p>
+                <p className="m-0 text-secondary">{profile.phone}</p>
+                <p className="m-0 text-secondary">{profile.dateOfBirth}</p>
                 <br></br>
                 <div className="text-secondary pb-2">
-                    <i className="bi bi-geo-alt"></i>{currentUser.location}
-                    <i className="bi bi-calendar ms-2"></i>{currentUser.dateJoined}
-                    <i className="bi bi-balloon ms-2"></i>{currentUser.numOfTrips}
+                    <i className="bi bi-geo-alt"></i>{profile.location}
+                    <i className="bi bi-calendar ms-2"></i>{profile.dateJoined}
+                    <i className="bi bi-balloon ms-2"></i>{profile.numOfTrips}
                 </div>
                 <br></br>
                 <div>
                     <span className="fw-bold">Favorite Parks</span>
                     <br></br>
-                    <span className="text-secondary">{currentUser.favoriteParks}</span>
+                    <span className="text-secondary">{profile.favoriteParks}</span>
                     <br></br><br></br>
                     <span className="fw-bold">TripsPlanned</span>
                     <br></br>
-                    <span className="text-secondary">{currentUser.tripsPlanned}</span>
+                    <span className="text-secondary">{profile.tripsPlanned}</span>
                     <br></br><br></br>
                     <span className='fw-bold'>Friends</span>
                     <br></br>
-                    <span className="text-secondary">{currentUser.friendsList}</span>
+                    <span className="text-secondary">{profile.friendsList}</span>
                 </div>
             </div>
         </div>
-    );}
+    );
 }
 
 export default ProfileComponent;

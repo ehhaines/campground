@@ -21,7 +21,8 @@ const store = configureStore({
   reducer: {
     nps: npsReducer,
     parks: parksReducer,
-    users: usersReducer
+    users: usersReducer,
+    profile: profileReducer
   }
 })
 
