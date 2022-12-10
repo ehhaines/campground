@@ -14,13 +14,15 @@ import "./App.css";
 import HomeComponent from "./Home";
 import ParkComponent from "./Park";
 import parksReducer from "./Park/parks-reducer";
+import reviewsReducer from "./Review/reviews-reducer";
 
 const store = configureStore({
   reducer: {
     nps: npsReducer,
     parks: parksReducer,
     users: usersReducer,
-    profile: profileReducer
+    profile: profileReducer,
+    reviews: reviewsReducer
   }
 })
 
