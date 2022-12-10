@@ -17,12 +17,10 @@ const ProfileComponent = () => {
             <div className="row">
                 <div className="col">
                     <div>
-                        <div className="float-start">
-                            <h3 className="fw-bold">{profile.username}</h3>
-                        </div>
+                        <h3 className="mt-2 fw-bold float-start">{profile.username}</h3>
                         <Link to="/">
                             <button className="float-end btn">
-                                <i className="bi bi-arrow-left-short fs-4 text-black">Log out</i>
+                                <i className="bi bi-arrow-left-short fs-4 text-black btn-link">Log out</i>
                             </button>
                         </Link>
                     </div>
@@ -37,7 +35,7 @@ const ProfileComponent = () => {
                     </div>
                     <div className="col-8">
                         <Link to="/edit-profile" className="clearfix">
-                            <button className="btn btn-light fw-bold rounded-pill float-end mt-3">
+                            <button className="btn btn-outline-success fw-bold rounded-pill float-end mt-3">
                                 Edit Profile
                             </button>
                         </Link>
@@ -45,18 +43,16 @@ const ProfileComponent = () => {
                 </div>
             </div>
 
-
             <div>
                 <h3 className="m-0 fw-bold">{profile.username}</h3>
-                <p className="m-0 text-secondary">{profile.email}</p>
-                <p className="m-0 text-secondary">{profile.phone}</p>
-                <p className="m-0 text-secondary">{profile.dateOfBirth}</p>
-                <br></br>
                 <div className="text-secondary pb-2">
                     <i className="bi bi-geo-alt"></i>{profile.location}
                     <i className="bi bi-calendar ms-2"></i>{profile.dateJoined}
                     <i className="bi bi-balloon ms-2"></i>{profile.numOfTrips}
                 </div>
+                <p className="m-0 text-secondary">Email:{profile.email}</p>
+                <p className="m-0 text-secondary">Phone:{profile.phone}</p>
+                <p className="m-0 text-secondary">Born:{profile.dateOfBirth}</p>
                 <br></br>
                 <div>
                     <span className="fw-bold">Favorite Parks</span>
@@ -71,6 +67,8 @@ const ProfileComponent = () => {
                     <br></br>
                     <span className="text-secondary">{profile.friendsList}</span>
                 </div>
+                <br></br>
+                <br></br>
             </div>
         </div>
     );
