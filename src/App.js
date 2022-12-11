@@ -15,6 +15,7 @@ import HomeComponent from "./Home";
 import ParkComponent from "./Park";
 import parksReducer from "./Park/parks-reducer";
 import reviewsReducer from "./Review/reviews-reducer";
+import NpsSearchResults from "./nps/Search/nps-search-results";
 
 const store = configureStore({
   reducer: {
@@ -34,7 +35,8 @@ function App() {
         <div className="m-0 p-0">
           <Routes>
             <Route path="/*" element={<HomeComponent/>}/>
-            <Route path="/search/*" element={<NpsSearch/>}/>
+            <Route path="/search" element={<NpsSearch/>}/>
+            <Route path="/search/:park" element={<NpsSearchResults/>}/>
             <Route path="/details/:park" element={<ParkComponent/>}/>
             <Route path="/login" element={<LoginComponent/>}/>
             <Route path="/profile" element={<ProfileComponent/>}/>
