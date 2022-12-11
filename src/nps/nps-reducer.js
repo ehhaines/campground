@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { findParksBySearchTermThunk } from "./nps-thunk";
+import { findNpsParkByParkCodeThunk, findParksBySearchTermThunk } from "./nps-thunk";
 
 const initialState = {
   parks: [],
-  loading: false
+  npsPark: {},
+  loading: false,
+  npsLoading: false
 }
 
 const npsReducer = createSlice({
@@ -17,6 +19,14 @@ const npsReducer = createSlice({
     [findParksBySearchTermThunk.fulfilled]: (state, action) => {
       state.parks = action.payload.data
       state.loading = false
+    },
+    [findNpsParkByParkCodeThunk.pending]: (state, action) => {
+      state.npsPark = {}
+      state.npsLoading = true
+    },
+    [findNpsParkByParkCodeThunk.fulfilled]: (state, action) => {
+      state.npsPark = action.payload.data[0]
+      state.npsLoading = false
     }
   }
 });

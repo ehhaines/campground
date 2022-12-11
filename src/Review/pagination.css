@@ -1,0 +1,21 @@
+.pagination {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.pagination .page-num {
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-weight: 400;
+}
+
+.pagination .page-num:hover {
+  background-color: gainsboro;
+}
+
+.pagination .active {
+  background-color: beige;
+}
