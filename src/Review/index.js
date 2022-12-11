@@ -7,7 +7,7 @@ import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import CreateReview from "./create-review";
 
-const sampleUser = "sample_user_2";
+// const sampleUser = "sample_user_2";
 
 function Reviews({ currentReviews }) {
   return (
@@ -28,6 +28,7 @@ const ReviewsListComponent = () => {
   const thisPark = params.park;
 
   const {reviews, reviewsLoading} = useSelector((state) => state.reviews)
+  const {currentUser} = useSelector((state) => state.users);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -67,8 +68,8 @@ const ReviewsListComponent = () => {
       </ul>
       <br></br><br></br>
       <div className="text-dark h5">Submit a review!</div>
-      {reviews.filter(rev => rev.user === sampleUser).length === 0 && <CreateReview className="w-75"/>}
-      {reviews.filter(rev => rev.user === sampleUser).length > 0 && <div className="text-secondary h5 mt-3">...You've already reviewed this park!</div>}
+      {reviews.filter(rev => rev.user === currentUser).length === 0 && <CreateReview className="w-75"/>}
+      {reviews.filter(rev => rev.user === currentUser).length > 0 && <div className="text-secondary h5 mt-3">...You've already reviewed this park!</div>}
     </div>
   );
 }
