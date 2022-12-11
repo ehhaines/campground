@@ -2,23 +2,23 @@ import React from "react";
 import "./profile.css";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-// import {logoutThunk} from "./users-thunks";
+import {logoutThunk} from "./users-thunks";
 
 const ProfileComponent = () => {
-    const profile = useSelector(state => state.profile);
-    // const dispatch = useDispatch();
-    // const handleLogout = () => {
-    //     dispatch(logoutThunk())
-    // }
-
+    const {currentUser} = useSelector(state => state.users);
+    const dispatch = useDispatch();
+    const handleLogout = () => {
+        dispatch(logoutThunk())
+    }
     return(
-
+        <div>
+        {currentUser &&
         <div className="container margin-top">
             <div className="row">
                 <div className="col">
                     <div>
-                        <h3 className="mt-2 fw-bold float-start">{profile.username}</h3>
-                        <Link to="/">
+                        <h3 className="mt-2 fw-bold float-start">{currentUser.username}</h3>
+                        <Link to="/" onClick={handleLogout}>
                             <button className="float-end btn">
                                 <i className="bi bi-arrow-left-short fs-4 text-black btn-link">Log out</i>
                             </button>
@@ -44,32 +44,33 @@ const ProfileComponent = () => {
             </div>
 
             <div>
-                <h3 className="m-0 fw-bold">{profile.username}</h3>
+                <h3 className="m-0 fw-bold">{currentUser.username}</h3>
                 <div className="text-secondary pb-2">
-                    <i className="bi bi-geo-alt"></i>{profile.location}
-                    <i className="bi bi-calendar ms-2"></i>{profile.dateJoined}
-                    <i className="bi bi-balloon ms-2"></i>{profile.numOfTrips}
+                    <i className="bi bi-geo-alt"></i>{currentUser.location}
+                    <i className="bi bi-calendar ms-2"></i>{currentUser.dateJoined}
+                    <i className="bi bi-balloon ms-2"></i>{currentUser.numOfTrips}
                 </div>
-                <p className="m-0 text-secondary">Email:{profile.email}</p>
-                <p className="m-0 text-secondary">Phone:{profile.phone}</p>
-                <p className="m-0 text-secondary">Born:{profile.dateOfBirth}</p>
+                <p className="m-0 text-secondary">Email:{currentUser.email}</p>
+                <p className="m-0 text-secondary">Phone:{currentUser.phone}</p>
+                <p className="m-0 text-secondary">Born:{currentUser.dateOfBirth}</p>
                 <br></br>
                 <div>
                     <span className="fw-bold">Favorite Parks</span>
                     <br></br>
-                    <span className="text-secondary">{profile.favoriteParks}</span>
+                    <span className="text-secondary">{currentUser.favoriteParks}</span>
                     <br></br><br></br>
                     <span className="fw-bold">TripsPlanned</span>
                     <br></br>
-                    <span className="text-secondary">{profile.tripsPlanned}</span>
+                    <span className="text-secondary">{currentUser.tripsPlanned}</span>
                     <br></br><br></br>
                     <span className='fw-bold'>Friends</span>
                     <br></br>
-                    <span className="text-secondary">{profile.friendsList}</span>
+                    <span className="text-secondary">{currentUser.friendsList}</span>
                 </div>
                 <br></br>
                 <br></br>
             </div>
+        </div>}
         </div>
     );
 }

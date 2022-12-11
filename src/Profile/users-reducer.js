@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {findAllUsersThunk, loginThunk, logoutThunk, profileThunk, registerThunk} from "./users-thunks";
+import {findAllUsersThunk, loginThunk, logoutThunk, profileThunk, registerThunk, updateProfileThunk} from "./users-thunks";
 import {current} from "@reduxjs/toolkit"
 
 const usersReducer = createSlice({
@@ -38,14 +38,27 @@ const usersReducer = createSlice({
             state.currentUser = null
             console.log(current(state))
         },
+        [profileThunk.pending]:
+            (state) => {
+                state.loading = true;
+            },
         [profileThunk.fulfilled]: (state, action) => {
+            state.loading = false;
             state.currentUser = action.payload
             console.log("profile fulfilled: " + JSON.stringify(current(state)))
         },
         [profileThunk.rejected]: (state, action) => {
+            state.loading = false;
             state.error = action.payload
             state.currentUser = null
-            console.log("rejected" + current(state))
+            console.log("profile rejected" + current(state))
+        },
+        [updateProfileThunk.fulfilled]: (state, action) => {
+
+        },
+        [updateProfileThunk.rejected]: (state, action) => {
+            state.error = action.payload
+
         }
     }
 })

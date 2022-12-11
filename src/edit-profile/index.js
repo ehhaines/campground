@@ -3,25 +3,35 @@ import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {updateProfile} from "../reducers/profile-reducer";
+import {updateProfileThunk} from "../Profile/users-thunks";
 import "../Profile/profile.css";
 
 const EditProfile = () => {
     const navigate = useNavigate();
-    const profile = useSelector(state => state.profile);
+    const currentUser = useSelector(state => state.users.currentUser);
     const dispatch = useDispatch();
 
-    const [name, setName] = useState(profile.username);
-    const [email, setEmail] = useState(profile.email);
-    const [phone, setPhone] = useState(profile.phone);
-    const [location, setLocation] = useState(profile.location);
-    const birthdayData = profile.dateOfBirth.split('/')
-    const [birthday, setBirthday] = useState(birthdayData[2] + "-" + birthdayData[0] + '-' + birthdayData[1]);
+
+    const [name, setName] = useState(currentUser.username);
+    const [email, setEmail] = useState(currentUser.email);
+    const [phone, setPhone] = useState(currentUser.phone);
+    const [location, setLocation] = useState(currentUser.location);
+    // const birthdayData = currentUser.dateOfBirth.split('/')
+    // const [birthday, setBirthday] = useState(birthdayData[2] + "-" + birthdayData[0] + '-' + birthdayData[1]);
+
+    const birthdayData = useState('')
+    const [birthday, setBirthday] = useState('');
+
 
     const updateProfileHandler = () => {
-        dispatch(updateProfile({name, email, phone, location, birthday}));
+        // dispatch(updateProfile({name, email, phone, location, birthday}));
+
         navigate('/profile');
     }
+
     return (
+        <div>
+            {currentUser &&
         <div>
         <div className="row margin-top">
             <div className="float-start text-black fw-bold fs-4 ms-2">Edit Profile</div>
@@ -112,6 +122,8 @@ const EditProfile = () => {
             </div>
             <br></br>
 
+        </div>
+            }
         </div>
     )
 }
