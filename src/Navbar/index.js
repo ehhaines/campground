@@ -4,8 +4,11 @@ import { faTents } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
+import { useSelector } from "react-redux";
 
 const NavbarComponent = () => {
+
+  const {currentUser} = useSelector(state => state.users);
 
   return(
     <nav className="navbar fixed-top navbar-expand navbar-light eh-navbar-background">
@@ -18,12 +21,12 @@ const NavbarComponent = () => {
                 <li className="nav-item">
                     <a href="/search" className="nav-link m-2 menu-item nav-active"><FontAwesomeIcon icon={faMagnifyingGlass} size="lg"/> <span className="eh-visibility">Search</span></a>
                 </li>
-                <li className="nav-item">
+                {!currentUser && <li className="nav-item">
                     <a href="/login" className="nav-link m-2 menu-item"><FontAwesomeIcon icon={faUser} size="lg"/> <span className="eh-visibility">Log in</span></a>
-                </li>
-                <li className="nav-item">
+                </li>}
+                {currentUser && <li className="nav-item">
                     <a href="/profile" className="nav-link m-2 menu-item"><FontAwesomeIcon icon={faUser} size="lg"/> <span className="eh-visibility">Profile</span></a>
-                </li>
+                </li>}
 
             </ul>
         </div>
