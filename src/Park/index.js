@@ -8,13 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { findParkByCodeThunk } from "./parks-thunks";
 import ReviewsListComponent from "../Review";
 import { findNpsParkByParkCodeThunk } from "../nps/nps-thunk";
+import LoadSVG from "../Spin-1s-200px.svg";
 
 const ParkComponent = () => {
 
   const params = useParams();
   const thisPark = params.park;
 
-  const {currentPark, loading} = useSelector((state) => state.parks);
   const {reviews, reviewsLoading} = useSelector((state) => state.reviews);
   const {npsPark, npsLoading} = useSelector((state) => state.nps);
 
@@ -52,7 +52,10 @@ const ParkComponent = () => {
 
   return(
     <div className="eh-offset">
-      {npsLoading && <div>Loading...</div>}
+      {npsLoading &&
+      <div className="text-center">
+      <img src={LoadSVG} alt="...Loading..." />
+    </div>}
       {!npsLoading && <div>
         <div className="container">
           <div className="row my-3">
