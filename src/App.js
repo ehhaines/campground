@@ -10,7 +10,7 @@ import NpsSearch from "./nps/Search/nps-search";
 import npsReducer from "./nps/nps-reducer";
 import usersReducer from "./Profile/users-reducer";
 import profileReducer from "./reducers/profile-reducer";
-// import {store} from "./store";
+import {store} from "./store";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import "./App.css";
@@ -21,25 +21,25 @@ import reviewsReducer from "./Review/reviews-reducer";
 import NpsSearchResults from "./nps/Search/nps-search-results";
 import CurrentUser from "./Profile/current-user";
 import {persistStore} from "redux-persist";
-//import {PersistGate} from "redux-persist/integration/react";
+import {PersistGate} from "redux-persist/integration/react";
 
 
-const store = configureStore({
-  reducer: {
-    nps: npsReducer,
-    parks: parksReducer,
-    users: usersReducer,
-    profile: profileReducer,
-    reviews: reviewsReducer
-  }
-})
+// const store = configureStore({
+//   reducer: {
+//     nps: npsReducer,
+//     parks: parksReducer,
+//     users: usersReducer,
+//     profile: profileReducer,
+//     reviews: reviewsReducer
+//   }
+// })
 
 let persistor = persistStore(store);
 
 function App() {
   return (
     <Provider store={store} >
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <NavbarComponent/>
         <div className="m-0 p-0">
           <Routes>
@@ -52,8 +52,8 @@ function App() {
             <Route path="/edit-profile" element={<EditProfile/>}/>
           </Routes>
         </div>
-      </BrowserRouter>
-      {/* <PersistGate loading={null} persistor={persistor}>
+      </BrowserRouter> */}
+      <PersistGate loading={null} persistor={persistor}>
       <CurrentUser>
         <BrowserRouter>
           <NavbarComponent/>
@@ -71,7 +71,7 @@ function App() {
           </div>
         </BrowserRouter>
       </CurrentUser>
-      </PersistGate> */}
+      </PersistGate>
     </Provider>
   );
 }

@@ -5,10 +5,10 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faFrown } from "@fortawesome/free-solid-svg-icons";
 import { faSmile } from "@fortawesome/free-solid-svg-icons";
 import { deleteReviewThunk, updateReviewThunk } from "./reviews-thunks";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
-const sampleUser = "sample_user_2";
+// const sampleUser = "sample_user_2";
 
 const ReviewItemComponent = ({review}) => {
 
@@ -38,6 +38,9 @@ const ReviewItemComponent = ({review}) => {
   const [editReviewText, setEditReviewText] = useState(review.review);
   const [sliderValue, setSliderValue] = useState(review.rating);
 
+  const {currentUser} = useSelector((state) => state.users);
+
+
   const nav = useNavigate();
   const dispatch = useDispatch();
 
@@ -45,11 +48,11 @@ const ReviewItemComponent = ({review}) => {
     <li className="list-group-item">
       <div className="row mt-1 mb-3">
         <div className="col-10 h5">
-          <span style={{"cursor": "pointer"}} onClick={() => nav(`/profile/${review.user}`)}>{review.user}</span> - <span className="text-secondary h6">{review.dateReviewed}</span> {review.user === sampleUser && 
+          <span style={{"cursor": "pointer"}} onClick={() => nav(`/profile/${review.user}`)}>{review.user}</span> - <span className="text-secondary h6">{review.dateReviewed}</span> {review.user === currentUser.username && 
           <button className="btn my-0 mx-1 p-0 ms-1" onClick={() => {dispatch(deleteReviewThunk(review))}}>
             <FontAwesomeIcon icon={faTrash} color="red"/>
           </button>}
-          {review.user === sampleUser && <button className="btn my-0 mx-1 p-0 ms-1" onClick={() => {setIsEditing(true)}}>
+          {review.user === currentUser.username && <button className="btn my-0 mx-1 p-0 ms-1" onClick={() => {setIsEditing(true)}}>
             <FontAwesomeIcon icon={faPenToSquare} color="blue"/>
           </button>}
         </div>
