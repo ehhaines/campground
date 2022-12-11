@@ -4,9 +4,9 @@ import { faFrown } from "@fortawesome/free-solid-svg-icons";
 import { faSmile } from "@fortawesome/free-solid-svg-icons";
 import { createReviewsThunk } from "./reviews-thunks";
 import { useParams } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const sampleUser = "sample_user_2"
+// const sampleUser = "sample_user_2"
 
 const CreateReview = () => {
 
@@ -18,6 +18,8 @@ const CreateReview = () => {
 
   const [sliderValue, setSliderValue] = useState(10);
   const [reviewText, setReviewText] = useState("");
+
+  const {currentUser} = useSelector((state) => state.users);
 
   const dispatch = useDispatch();
 
@@ -61,9 +63,10 @@ const CreateReview = () => {
       </div>
       <div className="text-end">
         <button className="btn btn-outline-primary mt-3 w-25 py-2" onClick={() => {
+          // console.log(currentUser.username);
           dispatch(createReviewsThunk(
             {
-              user: sampleUser,
+              user: currentUser.username,
               parkCode: thisPark,
               rating: sliderValue,
               dateReviewed: today,

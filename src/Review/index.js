@@ -68,8 +68,8 @@ const ReviewsListComponent = () => {
       </ul>
       <br></br><br></br>
       <div className="text-dark h5">Submit a review!</div>
-      {reviews.filter(rev => rev.user === currentUser).length === 0 && <CreateReview className="w-75"/>}
-      {reviews.filter(rev => rev.user === currentUser).length > 0 && <div className="text-secondary h5 mt-3">...You've already reviewed this park!</div>}
+      {reviews.filter(rev => rev.user === currentUser.username).length === 0 && <CreateReview className="w-75"/>}
+      {reviews.filter(rev => rev.user === currentUser.username).length > 0 && <div className="text-secondary h5 mt-3">...You've already reviewed this park!</div>}
     </div>
   );
 }
