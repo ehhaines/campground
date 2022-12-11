@@ -67,6 +67,7 @@ const CreateReview = () => {
               parkCode: thisPark,
               rating: sliderValue,
               dateReviewed: today,
+              dateEdited: null,
               review: reviewText
             }
           ));

@@ -6,6 +6,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
 
 const NavbarComponent = () => {
+
   return(
     <nav className="navbar fixed-top navbar-expand navbar-light eh-navbar-background">
       <div className="container-fluid">
