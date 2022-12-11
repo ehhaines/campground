@@ -5,7 +5,8 @@ import ResultList from "./result-list";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import "./nps.css";
-import LoadSVG from "../../Spin-1s-200px.svg"
+import LoadSVG from "../../Spin-1s-200px.svg";
+import { useNavigate } from "react-router";
 
 const NpsSearch = () => {
 
@@ -13,6 +14,8 @@ const NpsSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const {parks, loading} = useSelector((state) => state.nps)
   const dispatch = useDispatch();
+
+  const nav = useNavigate();
 
   useEffect(() => {
     dispatch(findParksBySearchTermThunk(searchTerm))
@@ -32,6 +35,7 @@ const NpsSearch = () => {
           if (e.key === 'Enter') {
             console.log("keypressed");
             dispatch(findParksBySearchTermThunk(searchTerm));
+            nav(`/search/${searchTerm}`);
             setIsSearchResults(true);
           }
         }}
@@ -46,6 +50,7 @@ const NpsSearch = () => {
             <button className="bg-transparent border-0 position-absolute top-0 end-0 eh-button rounded-circle" style={{"zIndex": 3}}
             onClick={() => {
               setIsSearchResults(false);
+              nav("/search");
             }}
             >
               <FontAwesomeIcon icon={faX}/>

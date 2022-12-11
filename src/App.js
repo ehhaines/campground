@@ -34,7 +34,7 @@ function App() {
         <div className="m-0 p-0">
           <Routes>
             <Route path="/*" element={<HomeComponent/>}/>
-            <Route path="/search" element={<NpsSearch/>}/>
+            <Route path="/search/*" element={<NpsSearch/>}/>
             <Route path="/details/:park" element={<ParkComponent/>}/>
             <Route path="/login" element={<LoginComponent/>}/>
             <Route path="/profile" element={<ProfileComponent/>}/>
