@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import "../offset.css";
 import "./index.css";
+import ReviewsListComponent from "../Review";
 import { useDispatch, useSelector } from "react-redux";
 import { findParkByCodeThunk } from "./parks-thunks";
+import { findNpsParkByParkCodeThunk } from "../nps/nps-thunk";
+import LoadSVG from "../Spin-1s-200px.svg";
 
 const ParkComponent = () => {
 

@@ -10,7 +10,7 @@ import NpsSearch from "./nps/Search/nps-search";
 import npsReducer from "./nps/nps-reducer";
 import usersReducer from "./Profile/users-reducer";
 import profileReducer from "./reducers/profile-reducer";
-import {store} from "./store";
+// import {store} from "./store";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import "./App.css";
@@ -19,6 +19,10 @@ import ParkComponent from "./Park";
 import parksReducer from "./Park/parks-reducer";
 import reviewsReducer from "./Review/reviews-reducer";
 import NpsSearchResults from "./nps/Search/nps-search-results";
+import CurrentUser from "./Profile/current-user";
+import {persistStore} from "redux-persist";
+//import {PersistGate} from "redux-persist/integration/react";
+
 
 const store = configureStore({
   reducer: {
@@ -29,20 +33,8 @@ const store = configureStore({
     reviews: reviewsReducer
   }
 })
-import CurrentUser from "./Profile/current-user";
-import {persistStore} from "redux-persist";
-import {PersistGate} from "redux-persist/integration/react";
-
 
 let persistor = persistStore(store);
-// const store = configureStore({
-//   reducer: {
-//     nps: npsReducer,
-//     parks: parksReducer,
-//     users: usersReducer,
-//     profile: profileReducer
-//   }
-// })
 
 function App() {
   return (
@@ -61,7 +53,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
-      <PersistGate loading={null} persistor={persistor}>
+      {/* <PersistGate loading={null} persistor={persistor}>
       <CurrentUser>
         <BrowserRouter>
           <NavbarComponent/>
@@ -69,6 +61,7 @@ function App() {
             <Routes>
               <Route path="/*" element={<HomeComponent/>}/>
               <Route path="/search" element={<NpsSearch/>}/>
+              <Route path="/search/:park" element={<NpsSearchResults/>}/>
               <Route path="/details/:park" element={<ParkComponent/>}/>
               <Route path="/login" element={<LoginComponent/>}/>
               <Route path="/profile" element={<ProfileComponent/>}/>
@@ -78,7 +71,7 @@ function App() {
           </div>
         </BrowserRouter>
       </CurrentUser>
-      </PersistGate>
+      </PersistGate> */}
     </Provider>
   );
 }
