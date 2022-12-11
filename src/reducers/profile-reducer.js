@@ -5,7 +5,7 @@ const profile = {
     profilePicture: 'yellowstong1.png',
     bannerPicture: 'route1.jpg',
     email: 'sample@gmail.com',
-    phone: 6043123123,
+    phone: '6043123123',
     location: 'Sunnyvale, CA',
     dateOfBirth : '01/01/2022',
     numOfTrips: 8,
@@ -21,7 +21,7 @@ const profileSlice = createSlice({
     reducers: {
         updateProfile(state, action) {
             const updatedProfile = action.payload;
-            let [username] = updatedProfile.username;
+            const username = updatedProfile.name;
             const email = updatedProfile.email;
             const phone = updatedProfile.phone;
             const location = updatedProfile.location;

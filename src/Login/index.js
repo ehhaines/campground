@@ -21,10 +21,10 @@ const LoginComponent = () => {
           <div>
             <ul className="nav nav-tabs">
               <li className="nav-item" onClick={() => setLogin(true)}>
-                <button className={`nav-link text-dark ${isLogin ? "active border-white" : "bg-secondary"}`}>Login</button>
+                <button className={`nav-link text-dark bg-opacity-50 ${isLogin ? "active border-white bg-white bg-opacity-75" : "bg-secondary bg-opacity-25"}`}>Login</button>
               </li>
               <li className="nav-item" onClick={() => setLogin(false)}>
-                <div className={`nav-link text-dark ${!isLogin ? "active border-white" : "bg-secondary"}`}>Sign up</div>
+                <div className={`nav-link text-dark bg-opacity-50 ${!isLogin ? "active border-white bg-white bg-opacity-75" : "bg-secondary bg-opacity-25"}`}>Sign up</div>
               </li>
             </ul>
           </div>

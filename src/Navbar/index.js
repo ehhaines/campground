@@ -20,6 +20,9 @@ const NavbarComponent = () => {
                 <li className="nav-item">
                     <a href="/login" className="nav-link m-2 menu-item"><FontAwesomeIcon icon={faUser} size="lg"/> <span className="eh-visibility">Log in</span></a>
                 </li>
+                <li className="nav-item">
+                    <a href="/profile" className="nav-link m-2 menu-item"><FontAwesomeIcon icon={faUser} size="lg"/> <span className="eh-visibility">Profile</span></a>
+                </li>
 
             </ul>
         </div>

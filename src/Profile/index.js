@@ -1,24 +1,28 @@
 import React from "react";
 import "./profile.css";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+import {logoutThunk} from "./users-thunks";
 
 const ProfileComponent = () => {
-    const profile = useSelector(state => state.profile);
-
+    const {currentUser} = useSelector(state => state.users);
+    const dispatch = useDispatch();
+    const handleLogout = () => {
+        dispatch(logoutThunk())
+    }
     return(
-
+        <div>
+        {currentUser &&
         <div className="container margin-top">
             <div className="row">
                 <div className="col">
                     <div>
-                        <Link to="/">
-                            <div className="float-start"><i className="bi bi-arrow-left-short fs-4 text-black"></i></div>
+                        <h3 className="mt-2 fw-bold float-start">{currentUser.username}</h3>
+                        <Link to="/" onClick={handleLogout}>
+                            <button className="float-end btn">
+                                <i className="bi bi-arrow-left-short fs-4 text-black btn-link">Log out</i>
+                            </button>
                         </Link>
-
-                        <div className="ms-5">
-                            <h3 className="fw-bold m-0">{profile.username}</h3>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -31,7 +35,7 @@ const ProfileComponent = () => {
                     </div>
                     <div className="col-8">
                         <Link to="/edit-profile" className="clearfix">
-                            <button className="btn btn-light fw-bold rounded-pill float-end mt-3">
+                            <button className="btn btn-outline-success fw-bold rounded-pill float-end mt-3">
                                 Edit Profile
                             </button>
                         </Link>
@@ -39,33 +43,34 @@ const ProfileComponent = () => {
                 </div>
             </div>
 
-
             <div>
-                <h3 className="m-0 fw-bold">{profile.username}</h3>
-                <p className="m-0 text-secondary">{profile.email}</p>
-                <p className="m-0 text-secondary">{profile.phone}</p>
-                <p className="m-0 text-secondary">{profile.dateOfBirth}</p>
-                <br></br>
+                <h3 className="m-0 fw-bold">{currentUser.username}</h3>
                 <div className="text-secondary pb-2">
-                    <i className="bi bi-geo-alt"></i>{profile.location}
-                    <i className="bi bi-calendar ms-2"></i>{profile.dateJoined}
-                    <i className="bi bi-balloon ms-2"></i>{profile.numOfTrips}
+                    <i className="bi bi-geo-alt"></i>{currentUser.location}
+                    <i className="bi bi-calendar ms-2"></i>{currentUser.dateJoined}
+                    <i className="bi bi-balloon ms-2"></i>{currentUser.numOfTrips}
                 </div>
+                <p className="m-0 text-secondary">Email:{currentUser.email}</p>
+                <p className="m-0 text-secondary">Phone:{currentUser.phone}</p>
+                <p className="m-0 text-secondary">Born:{currentUser.dateOfBirth}</p>
                 <br></br>
                 <div>
                     <span className="fw-bold">Favorite Parks</span>
                     <br></br>
-                    <span className="text-secondary">{profile.favoriteParks}</span>
+                    <span className="text-secondary">{currentUser.favoriteParks}</span>
                     <br></br><br></br>
                     <span className="fw-bold">TripsPlanned</span>
                     <br></br>
-                    <span className="text-secondary">{profile.tripsPlanned}</span>
+                    <span className="text-secondary">{currentUser.tripsPlanned}</span>
                     <br></br><br></br>
                     <span className='fw-bold'>Friends</span>
                     <br></br>
-                    <span className="text-secondary">{profile.friendsList}</span>
+                    <span className="text-secondary">{currentUser.friendsList}</span>
                 </div>
+                <br></br>
+                <br></br>
             </div>
+        </div>}
         </div>
     );
 }

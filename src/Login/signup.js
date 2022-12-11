@@ -28,36 +28,36 @@ const Signup = () => {
 
     }
   return(
-    <div className="bg-white rounded-bottom overflow-hidden">
+    <div className="bg-white bg-opacity-50 rounded-bottom overflow-hidden">
       <div className="row">
         <div className="input-group mb-3 col">
-          <input type="text" className="form-control mt-3 ms-3 mb-2" aria-describedby="inputGroup-sizing-default" placeholder="First name"
+          <input type="text" className="form-control mt-3 ms-3 mb-2 bg-white bg-opacity-75" aria-describedby="inputGroup-sizing-default" placeholder="First name"
           value={firstName}
           onChange={(e) => {setFirstName(e.target.value)}}/>
         </div>
         <div className="input-group mb-3 col">
-          <input type="text" className="form-control mt-3 me-3 mb-2" aria-describedby="inputGroup-sizing-default" placeholder="Last name"
+          <input type="text" className="form-control mt-3 me-3 mb-2 bg-white bg-opacity-75" aria-describedby="inputGroup-sizing-default" placeholder="Last name"
           value={lastName}
           onChange={(e) => {setLastName(e.target.value)}}/>
         </div>
       </div>
       <div className="input-group mb-3 col">
-        <input type="text" className="form-control mx-3 my-2" aria-describedby="inputGroup-sizing-default" placeholder="Username"
+        <input type="text" className="form-control mx-3 my-2 bg-white bg-opacity-75" aria-describedby="inputGroup-sizing-default" placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}/>
       </div>
       <div className="input-group mb-3 col">
-        <input type="text" className="form-control mx-3 my-2" aria-describedby="inputGroup-sizing-default" placeholder="Email"
+        <input type="text" className="form-control mx-3 my-2 bg-white bg-opacity-75" aria-describedby="inputGroup-sizing-default" placeholder="Email"
         value={email}
         onChange={(e) => {setEmail(e.target.value)}}/>
       </div>
       <div className="input-group mb-3 col">
-        <input type="text" className="form-control mx-3 my-2" aria-describedby="inputGroup-sizing-default" placeholder="Password"
+        <input type="text" className="form-control mx-3 my-2 bg-white bg-opacity-75" aria-describedby="inputGroup-sizing-default" placeholder="Password"
         value={password}
         onChange={(e) => {setPassword(e.target.value)}}/>
       </div>
       <div className="input-group mb-3 col">
-        <input type="text" className="form-control mx-3 mt-2 mb-2" aria-describedby="inputGroup-sizing-default" placeholder="Confirm Password"
+        <input type="text" className="form-control mx-3 mt-2 mb-2 bg-white bg-opacity-75" aria-describedby="inputGroup-sizing-default" placeholder="Confirm Password"
         value={validatePassword}
         onChange={(e) => setValidatePassword(e.target.value)}/>
       </div>
