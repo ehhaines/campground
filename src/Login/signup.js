@@ -13,6 +13,7 @@ const Signup = () => {
     const [error, setError] = useState(null)
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
+    const selectRole='Please select your role:\xa0\xa0\xa0\xa0\xa0'
     const handleRegisterBtn = () => {
         if (username.length === 0) {
             setError('Username cannot be empty')
@@ -60,6 +61,17 @@ const Signup = () => {
         <input type="text" className="form-control mx-3 mt-2 mb-2 bg-white bg-opacity-75" aria-describedby="inputGroup-sizing-default" placeholder="Confirm Password"
         value={validatePassword}
         onChange={(e) => setValidatePassword(e.target.value)}/>
+      </div>
+      <div className="input-group mb-3 col">
+          <label className="ms-3 text-muted fw-bold text-opacity-75" htmlFor="select-one-role">
+              {selectRole}
+          </label><br/>
+          <select className="text-muted rounded-3 bg-white bg-opacity-75" id="select-one-role">
+              <option value="ADMINISTRATOR">Administrator</option>
+              <option value="PARK RANGER">Park Ranger</option>
+              <option value="CAMPER" selected>Camper</option>
+          </select>
+
       </div>
       <button className="btn btn-primary mx-3 mb-3 mt-2" onClick={handleRegisterBtn}>
           Submit

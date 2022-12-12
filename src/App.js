@@ -38,7 +38,7 @@ let persistor = persistStore(store);
 
 function App() {
   return (
-    <Provider store={store} >
+     <Provider store={store} >
       {/* <BrowserRouter>
         <NavbarComponent/>
         <div className="m-0 p-0">

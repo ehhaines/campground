@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {updateProfile} from "../reducers/profile-reducer";
+// import {updateProfile} from "../reducers/profile-reducer";
 import {updateProfileThunk, profileThunk} from "../Profile/users-thunks";
 import "../Profile/profile.css";
 
@@ -12,7 +12,8 @@ const EditProfile = () => {
     const dispatch = useDispatch();
 
 
-    const [name, setName] = useState(currentUser.username);
+    const [firstName, setFirstName] = useState(currentUser.firstName);
+    const [lastName, setLastName] = useState(currentUser.lastName);
     const [email, setEmail] = useState(currentUser.email);
     const [phone, setPhone] = useState(currentUser.phone);
     const [location, setLocation] = useState(currentUser.location);
@@ -24,7 +25,8 @@ const EditProfile = () => {
     const updateProfileHandler = () => {
         dispatch(updateProfileThunk({
             ...currentUser,
-            name: name,
+            firstName: firstName,
+            lastName: lastName,
             email: email,
             phone: phone,
             location: location,
@@ -66,10 +68,18 @@ const EditProfile = () => {
 
             <form>
                 <div className="form-group ms-3 me-3 fw-bold">
-                    <label htmlFor="inputName">Name</label>
-                    <input type="text" className="form-control" id="inputName" placeholder="Name"
-                           value={name} onChange={(e) => {
-                        setName(e.target.value)
+                    <label htmlFor="inputFirstName">FirstName</label>
+                    <input type="text" className="form-control" id="inputFirstName" placeholder="firstName"
+                           value={firstName} onChange={(e) => {
+                        setFirstName(e.target.value)
+                    }}/>
+                </div>
+
+                <div className="form-group pt-4 ms-3 me-3 fw-bold">
+                    <label htmlFor="inputLastName">LastName</label>
+                    <input type="text" className="form-control" id="inputLastName" placeholder="lastName"
+                           value={lastName} onChange={(e) => {
+                        setLastName(e.target.value)
                     }}/>
                 </div>
 
@@ -105,17 +115,12 @@ const EditProfile = () => {
             </form>
             <br></br>
             <div className="row mt-4">
-                <div className="col-3 ms-3">
-                    <Link to="/profile/advanced">
-                        <i className="h1 bi bi-arrow-right-short fs-4 text-black">switch to advanced account</i>
-                    </Link>
-                </div>
-
-                <div className="col-8">
+                <div className="col-1">
                     <Link to="/profile">
                         <i className="btn btn-dark rounded-pill float-end">Cancel</i>
                     </Link>
                 </div>
+                <div className="col-6"></div>
                 <div className="col pe-5">
                     <button
                         className="btn btn-dark rounded-pill float-end"

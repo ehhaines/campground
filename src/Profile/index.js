@@ -18,9 +18,9 @@ const ProfileComponent = () => {
                 <div className="col">
                     <div>
                         <h3 className="mt-2 fw-bold float-start">{currentUser.username}</h3>
-                        <Link to="/" onClick={handleLogout}>
+                        <Link to="/login" onClick={handleLogout}>
                             <button className="float-end btn">
-                                <i className="bi bi-arrow-left-short fs-4 text-black btn-link">Log out</i>
+                                <i className="btn btn-outline-primary fw-bold rounded-pill float-end mt-3">Log out</i>
                             </button>
                         </Link>
                     </div>
