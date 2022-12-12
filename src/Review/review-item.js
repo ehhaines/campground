@@ -48,7 +48,17 @@ const ReviewItemComponent = ({review}) => {
     <li className="list-group-item">
       <div className="row mt-1 mb-3">
         <div className="col-10 h5">
-          <span style={{"cursor": "pointer"}} onClick={() => nav(`/profile/${review.user}`)}>{review.user}</span> - <span className="text-secondary h6">{review.dateReviewed}</span> {currentUser && (review.user === currentUser.username && 
+          <span style={{"cursor": "pointer"}} onClick={() => {
+            if (currentUser) {
+              if (review.user === currentUser.username){
+                nav("/profile");
+              } else {
+                nav(`/profile/${review.user}`);
+              }
+            } else {
+              nav(`/profile/${review.user}`);
+            }
+          }}>{review.user}</span> - <span className="text-secondary h6">{review.dateReviewed}</span> {currentUser && (review.user === currentUser.username && 
           <button className="btn my-0 mx-1 p-0 ms-1" onClick={() => {dispatch(deleteReviewThunk(review))}}>
             <FontAwesomeIcon icon={faTrash} color="red"/>
           </button>)}
