@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {updateProfile} from "../reducers/profile-reducer";
-import {updateProfileThunk} from "../Profile/users-thunks";
+import {updateProfileThunk, profileThunk} from "../Profile/users-thunks";
 import "../Profile/profile.css";
 
 const EditProfile = () => {
@@ -18,13 +18,18 @@ const EditProfile = () => {
     const [location, setLocation] = useState(currentUser.location);
     // const birthdayData = currentUser.dateOfBirth.split('/')
     // const [birthday, setBirthday] = useState(birthdayData[2] + "-" + birthdayData[0] + '-' + birthdayData[1]);
-
-    const birthdayData = useState('')
-    const [birthday, setBirthday] = useState('');
+    const [birthday, setBirthday] = useState('')
 
 
     const updateProfileHandler = () => {
-        // dispatch(updateProfile({name, email, phone, location, birthday}));
+        dispatch(updateProfileThunk({
+            ...currentUser,
+            name: name,
+            email: email,
+            phone: phone,
+            location: location,
+        }))
+        dispatch(profileThunk)
 
         navigate('/profile');
     }
