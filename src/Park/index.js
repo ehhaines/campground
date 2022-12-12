@@ -80,8 +80,10 @@ const ParkComponent = () => {
               <div className="text-dark h5">Weather:</div>
               <div>{npsPark.weatherInfo}</div>
               <br></br><br></br>
-              <div className="text-dark h5">Your friends are visiting {npsPark.name}... Plan <i>your</i> trip next!</div>
-              <div>Placeholder for images of all of user's friends who have visited this park.</div>
+              {currentUser && <div>
+                <div className="text-dark h5">Your friends are visiting {npsPark.name}... Plan <i>your</i> trip next!</div>
+                <div>Placeholder for images of all of user's friends who have visited this park.</div>
+              </div>}
               <br></br><br></br>
               <div className="text-dark h5">Reviews:</div>
               {reviews.length === 0 && <div className="text-secondary h5">...There are no reviews for this park...</div>}

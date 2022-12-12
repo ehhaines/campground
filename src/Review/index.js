@@ -6,7 +6,6 @@ import "./pagination.css";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import CreateReview from "./create-review";
-import CurrentUser from "../Profile/current-user";
 
 // const sampleUser = "sample_user_2";
 

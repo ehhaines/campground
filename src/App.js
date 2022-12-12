@@ -22,6 +22,7 @@ import NpsSearchResults from "./nps/Search/nps-search-results";
 import CurrentUser from "./Profile/current-user";
 import {persistStore} from "redux-persist";
 import {PersistGate} from "redux-persist/integration/react";
+import AnonUserComponent from "./AnonProfile";
 
 
 // const store = configureStore({
@@ -65,6 +66,7 @@ function App() {
                 <Route path="/details/:park" element={<ParkComponent/>}/>
                 <Route path="/login" element={<LoginComponent/>}/>
                 <Route path="/profile" element={<ProfileComponent/>}/>
+                <Route path="/profile/:username" element={<AnonUserComponent/>}/>
                 <Route path="/edit-profile" element={<EditProfile/>}/>
                 <Route path="/others" element={<OthersComponent/>}/>
               </Routes>
