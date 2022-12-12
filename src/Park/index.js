@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import "../offset.css";
 import "./index.css";
 import ReviewsListComponent from "../Review";
@@ -17,6 +18,7 @@ const ParkComponent = () => {
 
   const {reviews, reviewsLoading} = useSelector((state) => state.reviews);
   const {npsPark, npsLoading} = useSelector((state) => state.nps);
+  const {currentUser} = useSelector(state => state.users);
 
   const calculateR = (rating) => {
     if (rating >= 5) {
@@ -68,6 +70,7 @@ const ParkComponent = () => {
                   {"color": `rgb(${calculateR(calcAvgRating())}, ${calculateG(calcAvgRating())}, 0)`}
                   }>{calcAvgRating()}</span> / 10
                 </div>}
+                {currentUser && <div className="h5" style={{"cursor": "pointer"}}><FontAwesomeIcon icon={faStar} color={!currentUser.favorite && "gainsboro"}{...currentUser.favorite && "gold"}/></div>}
               </div>
             </div>
             <div className="col-md-8 text-secondary mb-3 pb-3">

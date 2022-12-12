@@ -6,6 +6,7 @@ import "./pagination.css";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import CreateReview from "./create-review";
+import CurrentUser from "../Profile/current-user";
 
 // const sampleUser = "sample_user_2";
 
@@ -67,9 +68,11 @@ const ReviewsListComponent = () => {
         />
       </ul>
       <br></br><br></br>
-      <div className="text-dark h5">Submit a review!</div>
-      {reviews.filter(rev => rev.user === currentUser.username).length === 0 && <CreateReview className="w-75"/>}
-      {reviews.filter(rev => rev.user === currentUser.username).length > 0 && <div className="text-secondary h5 mt-3">...You've already reviewed this park!</div>}
+      <div className="text-dark h5">{currentUser && <span>Submit a review!</span>}{!currentUser && <span>You must log in to submit a review!</span>}</div>
+      {currentUser && <div>
+        {reviews.filter(rev => rev.user === currentUser.username).length === 0 && <CreateReview className="w-75"/>}
+        {reviews.filter(rev => rev.user === currentUser.username).length > 0 && <div className="text-secondary h5 mt-3">...You've already reviewed this park!</div>}
+      </div>}
     </div>
   );
 }

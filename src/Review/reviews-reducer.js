@@ -10,8 +10,8 @@ const parksReducer = createSlice({
   name: "reviews",
   initialState,
   extraReducers: {
-    [findReviewsByParkThunk.fulfilled]: (state, action) => {
-      state.reviews = action.payload;
+    [findReviewsByParkThunk.fulfilled]: (state, {payload}) => {
+      state.reviews = payload;
       state.reviewsLoading = false;
     },
     [findReviewsByParkThunk.pending]: (state, action) => {
