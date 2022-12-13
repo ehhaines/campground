@@ -6,6 +6,7 @@ import { findUserByUsernameThunk } from "./anon-user-thunks";
 import LoadSVG from "../Spin-1s-200px.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHand } from "@fortawesome/free-solid-svg-icons";
+import { findFriendshipsByUserThunk } from "../Friendship/friendships-thunk";
 
 const AnonUserComponent = () => {
 
@@ -14,11 +15,13 @@ const AnonUserComponent = () => {
 
   const {anonUser, anonUserLoading} = useSelector(state => state.anonUser);
   const {currentUser} = useSelector((state) => state.users);
+  const {friendships, friendshipsLoading} = useSelector((state) => state.friendships);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(findUserByUsernameThunk(username));
+    dispatch(findFriendshipsByUserThunk(username))
   }, []);
 
   return(
@@ -40,6 +43,7 @@ const AnonUserComponent = () => {
               <div className="text-center">{anonUser[0].username}</div>
               <div className="text-center">
                 <button className="btn btn-primary my-3">Add Friend</button>
+                {console.log(friendships)}
               </div>
             </div>
             <div className="col">
