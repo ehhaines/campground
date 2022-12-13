@@ -9,6 +9,7 @@ import anonUserReducer from '../AnonProfile/anon-user-reducer';
 import friendshipsReducer from '../Friendship/friendships-reducer';
 import tripsReducer from '../Trip/trips-reducer';
 
+
 const persistConfig = {
     key: 'root',
     storage,

@@ -10,6 +10,7 @@ import { findFriendshipsByUserThunk } from "../Friendship/friendships-thunk";
 import { findAllTripsThunk } from "../Trip/trips-thunks";
 import TripsComponent from "../Trip";
 
+
 const AnonUserComponent = () => {
 
   const params = useParams();
