@@ -2,6 +2,7 @@ import React from "react";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "../Profile/users-thunks"
+import {useNavigate} from "react-router";
 
 const Signup = () => {
     const [firstName, setFirstName] = useState('')
@@ -13,6 +14,7 @@ const Signup = () => {
     const [error, setError] = useState(null)
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const selectRole='Please select your role:\xa0\xa0\xa0\xa0\xa0'
     const handleRegisterBtn = () => {
         if (username.length === 0) {
@@ -84,7 +86,7 @@ const Signup = () => {
         }
         {
             currentUser &&
-            <h2>Welcome {currentUser.username}</h2>
+            navigate('/')
         }
     </div>
   );

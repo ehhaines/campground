@@ -10,6 +10,7 @@ const NavbarComponent = () => {
 
   const {currentUser} = useSelector(state => state.users);
 
+
   return(
     <nav className="navbar fixed-top navbar-expand navbar-light eh-navbar-background">
       <div className="container-fluid">

@@ -55,7 +55,6 @@ function App() {
         </div>
       </BrowserRouter> */}
       <PersistGate loading={null} persistor={persistor}>
-
           <BrowserRouter>
             <NavbarComponent/>
             <div className="m-0 p-0">
@@ -72,7 +71,6 @@ function App() {
               </Routes>
             </div>
           </BrowserRouter>
-
       </PersistGate>
     </Provider>
   );

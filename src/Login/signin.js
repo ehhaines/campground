@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "../Profile/users-thunks";
+import {useNavigate} from "react-router";
 
 const Signin = () => {
     const [username, setUsername] = useState('')
@@ -8,6 +9,7 @@ const Signin = () => {
     const [error, setError] = useState(null)
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const handleLoginBtn = () => {
         setError(null)
         const loginUser = {username, password}
@@ -40,8 +42,7 @@ const Signin = () => {
             </div>
         }
         {
-            currentUser &&
-            <h2>Welcome {currentUser.username}</h2>
+            currentUser && navigate('/')
         }
     </div>
   );
