@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
 import "../offset.css";
 import "./index.css";
 import ReviewsListComponent from "../Review";
@@ -10,11 +9,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { findParkByCodeThunk } from "./parks-thunks";
 import { findNpsParkByParkCodeThunk } from "../nps/nps-thunk";
 import LoadSVG from "../Spin-1s-200px.svg";
+import { createTripThunk } from "../Trip/trips-thunks";
 
 const ParkComponent = () => {
 
   const params = useParams();
   const thisPark = params.park;
+
+  const [isCreatingTrip, setIsCreatingTrip] = useState(false);
+  const [tripCreated, setTripCreated] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [notes, setNotes] = useState("");
 
   const {reviews, reviewsLoading} = useSelector((state) => state.reviews);
   const {npsPark, npsLoading} = useSelector((state) => state.nps);
@@ -70,7 +76,50 @@ const ParkComponent = () => {
                   {"color": `rgb(${calculateR(calcAvgRating())}, ${calculateG(calcAvgRating())}, 0)`}
                   }>{calcAvgRating()}</span> / 10
                 </div>}
-                {currentUser && <div className="h5" style={{"cursor": "pointer"}}><FontAwesomeIcon icon={faStar} color={!currentUser.favorite && "gainsboro"}{...currentUser.favorite && "gold"}/></div>}
+                {currentUser && <div>
+                  {!isCreatingTrip && <button className="btn btn-primary mt-3" onClick={() => setIsCreatingTrip(true)}>Create trip</button>}
+                  {isCreatingTrip &&
+                    <div>
+                      <div className="input-group">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text" id="start">Start</span>
+                        </div>
+                        <input type="text" className="form-control" aria-label="start" aria-describedby="start" placeholder="yyyy-mm-dd" value={startDate} onChange={e => setStartDate(e.target.value)}/>
+                      </div>
+                      <div className="input-group mb-1">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text" id="end">End</span>
+                        </div>
+                        <input type="text" className="form-control" aria-label="end" aria-describedby="end" placeholder="yyyy-mm-dd" value={endDate} onChange={e => setEndDate(e.target.value)}/>
+                      </div>
+                      <div className="form-group mb-2">
+                        <label htmlFor="notes">Notes:</label>
+                        <textarea className="form-control" id="notes" rows="2" value={notes} onChange={e => setNotes(e.target.value)}></textarea>
+                      </div>
+                      <div>
+                        <div><button className="btn btn-primary w-75 my-2" onClick={() => {dispatch(createTripThunk(
+                          {
+                            user: currentUser,
+                            parkCode: npsPark.parkCode,
+                            parkName: npsPark.fullName,
+                            startDate: startDate,
+                            endDate: endDate,
+                            notes: notes,
+                            isCompleted: false
+                          }
+                        ))
+                        setIsCreatingTrip(false)
+                        setTripCreated(true)
+                        setStartDate("")
+                        setEndDate("")
+                        setNotes("")}}>Create</button></div>
+                        <div><button className="btn btn-danger w-75 mb-3" onClick={() => setIsCreatingTrip(false)}>Cancel</button></div>
+                      </div>
+                    </div>
+                  }
+                  {console.log(currentUser)}
+                  {tripCreated && <div className="text-secondary my-3">Your Trip has been created!</div>}
+                </div>}
               </div>
             </div>
             <div className="col-md-8 text-secondary mb-3 pb-3">
