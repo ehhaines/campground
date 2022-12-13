@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHand } from "@fortawesome/free-solid-svg-icons";
 import { findFriendshipsByUserThunk } from "../Friendship/friendships-thunk";
 import { findAllTripsThunk } from "../Trip/trips-thunks";
-import TripsComponent from "../Trip";
+import TripsComponent from "../Trip/completed-trips";
 
 
 const AnonUserComponent = () => {
@@ -18,13 +18,13 @@ const AnonUserComponent = () => {
 
   const {anonUser, anonUserLoading} = useSelector(state => state.anonUser);
   const {currentUser} = useSelector((state) => state.users);
-  const {friendships, friendshipsLoading} = useSelector((state) => state.friendships);
+  // const {friendships, friendshipsLoading} = useSelector((state) => state.friendships);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(findUserByUsernameThunk(username));
-    dispatch(findFriendshipsByUserThunk(username));
+    // dispatch(findFriendshipsByUserThunk(username));
     dispatch(findAllTripsThunk());
   }, []);
 
@@ -43,22 +43,21 @@ const AnonUserComponent = () => {
         {(!anonUserLoading && anonUser.length > 0) &&
         <div>
           <div className="row mt-3 pt-3">
-            <div className="col-4 display-6 text-secondary">
+            <div className="col-md-4 display-6 text-secondary">
               <div className="text-center">{anonUser[0].username}</div>
               <div className="text-center">
-                <button className="btn btn-primary my-3">Add Friend</button>
-                {console.log(friendships)}
+                <button className="btn btn-primary my-3">Follow</button>
               </div>
             </div>
-            <div className="col">
+            <div className="col-md-8">
               <div>
                 <div className="display-6">Bio:</div>
                 {anonUser[0].bio && <div className="text-secondary">{anonUser[0].bio}</div>}
-                {!anonUser[0].bio && <i className="text-secondary">Bio not available...</i>}
+                {!anonUser[0].bio && <div className="text-secondary mt-3">Bio not available.</div>}
               </div>
               <div className="mt-3 pt-3">
                 <div className="display-6">Completed trips:</div>
-                <TripsComponent/>
+                <TripsComponent user={anonUser[0]._id}/>
               </div>
             </div>
           </div>
