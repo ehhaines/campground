@@ -1,81 +1,66 @@
-import React from "react";
-// import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import LoginComponent from "./Login";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavbarComponent from "./Navbar";
-import ProfileComponent from "./Profile";
-import OthersComponent from "./Profile/others";
-import EditProfile from "./edit-profile";
-import NpsSearch from "./nps/Search/nps-search";
-// import npsReducer from "./nps/nps-reducer";
-// import usersReducer from "./Profile/users-reducer";
-// import profileReducer from "./reducers/profile-reducer";
-import {store} from "./store";
-import { BrowserRouter } from "react-router-dom";
-import { Routes, Route } from "react-router";
-import "./App.css";
 import HomeComponent from "./Home";
 import ParkComponent from "./Park";
-// import parksReducer from "./Park/parks-reducer";
-// import reviewsReducer from "./Review/reviews-reducer";
+import NpsSearch from "./nps/Search/nps-search";
 import NpsSearchResults from "./nps/Search/nps-search-results";
-import CurrentUser from "./Profile/current-user";
-import {persistStore} from "redux-persist";
-import {PersistGate} from "redux-persist/integration/react";
 import AnonUserComponent from "./AnonProfile";
+import Users from "./users";
+import ProtectedRoute from "./users/protected-route";
+import Login from "./users/login";
+import Register from "./users/register";
+import Profile from "./users/profile";
+import CurrentUser from "./users/current-user";
+import npsReducer from "./nps/nps-reducer";
+import usersReducer from "./users/users-reducer";
+import parksReducer from "./Park/parks-reducer";
+import reviewsReducer from "./Review/reviews-reducer";
+import anonUserReducer from "./AnonProfile/anon-user-reducer"
 
-
-// const store = configureStore({
-//   reducer: {
-//     nps: npsReducer,
-//     parks: parksReducer,
-//     users: usersReducer,
-//     profile: profileReducer,
-//     reviews: reviewsReducer
-//   }
-// })
-
-let persistor = persistStore(store);
+const store = configureStore({
+  reducer:{
+    users: usersReducer,
+    nps: npsReducer,
+    parks: parksReducer,
+    reviews: reviewsReducer,
+    anonUser: anonUserReducer
+  }
+});
 
 function App() {
   return (
-     <Provider store={store} >
-      {/* <BrowserRouter>
-        <NavbarComponent/>
-        <div className="m-0 p-0">
-          <Routes>
-            <Route path="/*" element={<HomeComponent/>}/>
-            <Route path="/search" element={<NpsSearch/>}/>
-            <Route path="/search/:park" element={<NpsSearchResults/>}/>
-            <Route path="/details/:park" element={<ParkComponent/>}/>
-            <Route path="/login" element={<LoginComponent/>}/>
-            <Route path="/profile" element={<ProfileComponent/>}/>
-            <Route path="/edit-profile" element={<EditProfile/>}/>
-          </Routes>
-        </div>
-      </BrowserRouter> */}
-      <PersistGate loading={null} persistor={persistor}>
-
-          <BrowserRouter>
+    <div>
+      <Provider store={store}>
+        <BrowserRouter>
+          <CurrentUser>
             <NavbarComponent/>
-            <div className="m-0 p-0">
-              <Routes>
-                <Route path="/*" element={<HomeComponent/>}/>
-                <Route path="/search" element={<NpsSearch/>}/>
-                <Route path="/search/:park" element={<NpsSearchResults/>}/>
-                <Route path="/details/:park" element={<ParkComponent/>}/>
-                <Route path="/login" element={<LoginComponent/>}/>
-                <Route path="/profile" element={<ProfileComponent/>}/>
-                <Route path="/profile/:username" element={<AnonUserComponent/>}/>
-                <Route path="/edit-profile" element={<EditProfile/>}/>
-                <Route path="/others" element={<OthersComponent/>}/>
-              </Routes>
-            </div>
-          </BrowserRouter>
-
-      </PersistGate>
-    </Provider>
+            <Routes>
+              <Route index element={<HomeComponent/>}/>
+              <Route path="/search" element={<NpsSearch/>}/>
+              <Route path="/users" element={
+                <ProtectedRoute>
+                  <Users/>
+                </ProtectedRoute>
+              }/>
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/register" element={<Register/>}/>
+              <Route path="/profile" element={
+                <ProtectedRoute>
+                  <Profile/>
+                </ProtectedRoute>
+              }/>
+              <Route path="/details/:park" element={<ParkComponent/>}/>
+              <Route path="/profile/:username" element={<AnonUserComponent/>}/>
+              <Route path="/search/:park" element={<NpsSearchResults/>}/>
+            </Routes>
+          </CurrentUser>
+        </BrowserRouter>
+      </Provider>
+    </div>
   );
 }
 
 export default App;
+
