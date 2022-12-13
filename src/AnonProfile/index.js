@@ -7,6 +7,8 @@ import LoadSVG from "../Spin-1s-200px.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHand } from "@fortawesome/free-solid-svg-icons";
 import { findFriendshipsByUserThunk } from "../Friendship/friendships-thunk";
+import { findAllTripsThunk } from "../Trip/trips-thunks";
+import TripsComponent from "../Trip";
 
 const AnonUserComponent = () => {
 
@@ -21,7 +23,8 @@ const AnonUserComponent = () => {
 
   useEffect(() => {
     dispatch(findUserByUsernameThunk(username));
-    dispatch(findFriendshipsByUserThunk(username))
+    dispatch(findFriendshipsByUserThunk(username));
+    dispatch(findAllTripsThunk());
   }, []);
 
   return(
@@ -53,8 +56,8 @@ const AnonUserComponent = () => {
                 {!anonUser[0].bio && <i className="text-secondary">Bio not available...</i>}
               </div>
               <div className="mt-3 pt-3">
-                <div className="display-6">Favorite parks:</div>
-                <div className="text-secondary">Placeholder for the User's favorited parks.</div>
+                <div className="display-6">Completed trips:</div>
+                <TripsComponent/>
               </div>
             </div>
           </div>
