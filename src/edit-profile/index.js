@@ -31,6 +31,7 @@ const EditProfile = () => {
             email: email,
             phone: phone,
             location: location,
+            bio: bio
         }))
         dispatch(profileThunk)
 
