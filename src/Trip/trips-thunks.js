@@ -3,20 +3,24 @@ import { completeTrip, createTrip, deleteTrip, findAllTrips } from "./trips-serv
 
 export const createTripThunk = createAsyncThunk(
   'CreateTrip',
-  (trip) => createTrip(trip)
+  async (trip) => await createTrip(trip)
 );
 
 export const findAllTripsThunk = createAsyncThunk(
   'FindAllTrips',
-  () => findAllTrips()
+  async () => await findAllTrips()
 );
 
 export const deleteTripThunk = createAsyncThunk(
   'DeleteTrip',
-  (tripID) => deleteTrip(tripID)
+  async (tripID) => {
+      await deleteTrip(tripID)
+      return tripID
+  }
+
 );
 
 export const completeTripThunk = createAsyncThunk(
   'CompleteTrip',
-  (tripID) => completeTrip(tripID)
+  async (tripID) => await completeTrip(tripID)
 );

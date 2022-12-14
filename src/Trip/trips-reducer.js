@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { completeTripThunk, createTripThunk, deleteTripThunk, findAllTripsThunk } from "./trips-thunks";
+import {current} from "@reduxjs/toolkit";
 
 const initialState = {
   trips: [],
@@ -22,7 +23,12 @@ const tripsReducer = createSlice({
       state.trips.unshift(action.payload)
     },
     [deleteTripThunk.fulfilled]: (state, action) => {
+      state.tripsLoading = false
       state.trips = state.trips.filter(trip => trip._id !== action.payload._id)
+      console.log("delete trip: " + current(state))
+    },
+    [deleteTripThunk.rejected]: (state, action) => {
+      console.log("delete trip rejected: " + current(state))
     },
     [completeTripThunk.fulfilled]: (state, action) => {
       const replace = state.trips.findIndex(trip => trip._id === action.payload._id)

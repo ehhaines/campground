@@ -1,19 +1,18 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import "./profile.css";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {logoutThunk} from "./users-thunks";
 import CompletedTripsComponent from "../Trip/completed-trips";
-import {findAllTripsThunk} from "../Trip/trips-thunks";
+import {deleteTripThunk, findAllTripsThunk} from "../Trip/trips-thunks";
 import LoadSVG from "../Spin-1s-200px.svg";
 import {useNavigate} from "react-router";
+import AllTrips from "../Trip/all-trips";
+import RelevantTripsComponent from "../Trip/all-trips";
 
 const ProfileComponent = () => {
     const {currentUser} = useSelector(state => state.users);
-    const {trips, tripsLoading} = useSelector(state => state.trips);
 
-    const releventTrips = () => trips.filter(trip => trip.user === currentUser._id);
-    const completedTrips = () => releventTrips().filter(trip => trip.isCompleted);
     const dispatch = useDispatch();
     const nav = useNavigate();
     useEffect(() => {
@@ -22,14 +21,11 @@ const ProfileComponent = () => {
     const handleLogout = () => {
         dispatch(logoutThunk())
     }
+
+
     return(
         <div>
-            {tripsLoading &&
-                <div className="text-center">
-                    <img src={LoadSVG} alt="...Loading..." />
-                </div>
-            }
-        {currentUser && !tripsLoading &&
+        {currentUser &&
         <div className="container margin-top">
             <div className="row">
                 <div className="col">
@@ -73,29 +69,7 @@ const ProfileComponent = () => {
                 <br></br>
                 <div>
                     <span className="fw-bold">Trips Planned:</span>
-                    <div>
-                        <ul className="list-group mt-3">
-                            {
-                                releventTrips().map(trip =>
-                                    <li className="list-group-item" key={`${trip.parkCode}${trip.startDate}${trip.endDate}`}>
-                                        <span className="text-secondary h5" style={{"cursor": "pointer"}} onClick={() => nav(`/details/${trip.parkCode}`)}>{trip.parkName}</span> <span className="float-end text-secondary">{trip.startDate} - {trip.endDate}</span>
-                                    </li>)
-                            }
-                        </ul>
-                    </div>
-                    <br></br>
-                    <span className="fw-bold">Completed Trips:</span>
-                    <div>
-                        <ul className="list-group mt-3">
-                            {
-                                completedTrips().map(trip =>
-                                    <li className="list-group-item" key={`${trip.parkCode}${trip.startDate}${trip.endDate}`}>
-                                        <span className="text-secondary h5" style={{"cursor": "pointer"}} onClick={() => nav(`/details/${trip.parkCode}`)}>{trip.parkName}</span> <span className="float-end text-secondary">{trip.startDate} - {trip.endDate}</span>
-                                    </li>)
-                            }
-                        </ul>
-                        {completedTrips().length == 0 && <div className="text-secondary">No trips to show.</div>}
-                    </div>
+                    <RelevantTripsComponent user = {currentUser._id}/>
 
                     <br></br>
                     <span className="text-secondary">{currentUser.tripsPlanned}</span>
