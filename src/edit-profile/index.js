@@ -58,11 +58,6 @@ const EditProfile = () => {
                     <input type="file" className="ms-4"/>
                     <button className="text-secondary text-success border rounded-2">update profile picture</button>
                 </div>
-                <br></br>
-                <div>
-                    <input type="file" className="ms-4"/>
-                    <button className="text-secondary text-success border rounded-2 ">update background picture</button>
-                </div>
             </div>
             <br></br>
 
