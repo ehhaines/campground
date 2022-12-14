@@ -12,7 +12,7 @@ import LoadSVG from "../Spin-1s-200px.svg";
 import { createTripThunk } from "../Trip/trips-thunks";
 import { createAlertThunk, findAlertsByParkThunk } from "../Alert/alerts-thunks";
 import AlertItem from "../Alert";
-import { findModerationsByRangerThunk } from "../Moderations/moderations-thunks";
+import { findModerationsByParkThunk } from "../Moderations/moderations-thunks";
 
 const ParkComponent = () => {
 
@@ -31,7 +31,6 @@ const ParkComponent = () => {
   const {npsPark, npsLoading} = useSelector((state) => state.nps);
   const {currentUser} = useSelector(state => state.users);
   const {alerts, alertsLoading} = useSelector(state => state.alerts);
-  const {moderations, moderationsLoading} = useSelector(state => state.moderations);
 
   let today = new Date();
   today = today.toLocaleDateString();
@@ -67,7 +66,6 @@ const ParkComponent = () => {
     dispatch(findParkByCodeThunk(thisPark));
     dispatch(findNpsParkByParkCodeThunk(thisPark));
     dispatch(findAlertsByParkThunk(thisPark));
-    dispatch(findModerationsByRangerThunk(currentUser._id))
   }, []);
 
   return(
@@ -90,6 +88,7 @@ const ParkComponent = () => {
                   }>{calcAvgRating()}</span> / 10
                 </div>}
                 {currentUser && <div>
+                  {!isCreatingTrip && <button className="btn btn-primary my-3" onClick={() => setIsCreatingTrip(true)}>Create trip</button>}
                   {isCreatingTrip &&
                     <div>
                       <div className="input-group">
@@ -133,16 +132,14 @@ const ParkComponent = () => {
                 </div>}
               </div>
             </div>
-            <div className="col-md-8 text-secondary">
-              {console.log(currentUser, moderations.length, currentUser.type, currentUser._id)}
+            <div className="col-md-8 text-secondary mb-3 pb-3">
               {!alertsLoading && <ul className="list-group mb-3">
                 {
                   alerts.map(alert => <AlertItem alert={alert}/>)
                 }
               </ul>}
-              {(currentUser && moderations.length > 0) && ((currentUser.type === "RANGER" && (currentUser._id === moderations[0].ranger && moderations[0].parkCode === npsPark.parkCode)) && 
+              {currentUser && (currentUser.type === "RANGER" && 
                 <div>
-                  {console.log(isCreatingAlert)}
                   {!isCreatingAlert && 
                   <div className="text-center">
                     <button className="btn btn-danger" onClick={() => {setIsCreatingAlert(true)}}>Create alert</button>
@@ -154,10 +151,7 @@ const ParkComponent = () => {
                     </div>
                     <div className="row mt-2">
                       <div className="text-center col-6">
-                        <button className="btn btn-secondary w-75" onClick={() => {
-                          setIsCreatingAlert(false);
-                          setAlertBody("");
-                          }}>Cancel</button>
+                        <button className="btn btn-secondary w-75" onClick={() => {setIsCreatingAlert(false)}}>Cancel</button>
                       </div>
                       <div className="text-center col-6">
                         <button className="btn btn-danger w-75" onClick={() => {dispatch(createAlertThunk(
@@ -187,6 +181,7 @@ const ParkComponent = () => {
               <div className="text-dark h5">Reviews:</div>
               {reviews.length === 0 && <div className="text-secondary h5">...There are no reviews for this park...</div>}
               <ReviewsListComponent/>
+              <br></br><br></br>
             </div>
           </div>
         </div>

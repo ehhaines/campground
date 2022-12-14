@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import "../offset.css";
 import { findUserByUsernameThunk } from "./anon-user-thunks";
 import LoadSVG from "../Spin-1s-200px.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHand } from "@fortawesome/free-solid-svg-icons";
-import { findFriendshipsByUserThunk } from "../Friendship/friendships-thunk";
+import { faHatCowboySide } from "@fortawesome/free-solid-svg-icons";
 import { findAllTripsThunk } from "../Trip/trips-thunks";
 import TripsComponent from "../Trip/completed-trips";
+import { findModerationsByRangerThunk } from "../Moderations/moderations-thunks";
 
 
 const AnonUserComponent = () => {
@@ -17,16 +18,18 @@ const AnonUserComponent = () => {
   const username = params.username;
 
   const {anonUser, anonUserLoading} = useSelector(state => state.anonUser);
+  const {moderations, moderationsLoading} = useSelector(state => state.moderations);
   const {currentUser} = useSelector((state) => state.users);
-  // const {friendships, friendshipsLoading} = useSelector((state) => state.friendships);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(findModerationsByRangerThunk(username));
     dispatch(findUserByUsernameThunk(username));
-    // dispatch(findFriendshipsByUserThunk(username));
     dispatch(findAllTripsThunk());
   }, []);
+
+  const nav = useNavigate();
 
   return(
     <div className="eh-offset container">
@@ -45,6 +48,7 @@ const AnonUserComponent = () => {
           <div className="row mt-3 pt-3">
             <div className="col-md-4 display-6 text-secondary">
               <div className="text-center">{anonUser[0].username}</div>
+              {!moderationsLoading && (moderations.length > 0 && <div className="text-center h5 mt-1"><FontAwesomeIcon icon={faHatCowboySide} color="brown"/> Ranger: <span onClick={() => nav(`/details/${moderations[0].parkCode}`)} style={{"cursor": "pointer"}}>{moderations[0].parkCode}</span></div>)}
               <div className="text-center">
                 <button className="btn btn-primary my-3">Follow</button>
               </div>
