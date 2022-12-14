@@ -13,11 +13,11 @@ export const findAllTrips = async () => {
 }
 
 export const deleteTrip = async (tripID) => {
-  const response = await axios.delete(`${API_URL}${tripID}`);
+  const response = await axios.delete(`${API_URL}/${tripID}`);
   return response.data;
 }
 
 export const completeTrip = async (tripID) => {
-  const response = await axios.put(`${API_URL}${tripID}`);
+  const response = await axios.put(`${API_URL}/${tripID}`);
   return response.data;
 }

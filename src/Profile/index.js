@@ -1,15 +1,28 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./profile.css";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {logoutThunk} from "./users-thunks";
+import CompletedTripsComponent from "../Trip/completed-trips";
+import {deleteTripThunk, findAllTripsThunk} from "../Trip/trips-thunks";
+import LoadSVG from "../Spin-1s-200px.svg";
+import {useNavigate} from "react-router";
+import AllTrips from "../Trip/all-trips";
+import RelevantTripsComponent from "../Trip/all-trips";
 
 const ProfileComponent = () => {
     const {currentUser} = useSelector(state => state.users);
+
     const dispatch = useDispatch();
+    const nav = useNavigate();
+    useEffect(() => {
+        dispatch(findAllTripsThunk())
+    }, []);
     const handleLogout = () => {
         dispatch(logoutThunk())
     }
+
+
     return(
         <div>
         {currentUser &&
@@ -55,7 +68,10 @@ const ProfileComponent = () => {
                 <div className="fw-bold">bio{currentUser.bio}</div>
                 <br></br>
                 <div>
-                    <span className="fw-bold">TripsPlanned</span>
+
+                    <span className="fw-bold">Trips Planned:</span>
+                    <RelevantTripsComponent user = {currentUser._id}/>
+
                     <br></br>
                     <span className="text-secondary">{currentUser.tripsPlanned}</span>
                     <br></br><br></br>
