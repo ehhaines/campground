@@ -19,7 +19,8 @@ const EditProfile = () => {
     const [location, setLocation] = useState(currentUser.location);
     // const birthdayData = currentUser.dateOfBirth.split('/')
     // const [birthday, setBirthday] = useState(birthdayData[2] + "-" + birthdayData[0] + '-' + birthdayData[1]);
-    const [birthday, setBirthday] = useState('')
+    const [bio, setBio] = useState(currentUser.bio);
+
 
 
     const updateProfileHandler = () => {
@@ -30,6 +31,7 @@ const EditProfile = () => {
             email: email,
             phone: phone,
             location: location,
+            bio: bio
         }))
         dispatch(profileThunk)
 
@@ -57,11 +59,6 @@ const EditProfile = () => {
                 <div>
                     <input type="file" className="ms-4"/>
                     <button className="text-secondary text-success border rounded-2">update profile picture</button>
-                </div>
-                <br></br>
-                <div>
-                    <input type="file" className="ms-4"/>
-                    <button className="text-secondary text-success border rounded-2 ">update background picture</button>
                 </div>
             </div>
             <br></br>
@@ -105,13 +102,19 @@ const EditProfile = () => {
                            value={location} onChange={(e) => setLocation(e.target.value)}
                     />
                 </div>
-
                 <div className="form-group pt-4 ms-3 me-3 fw-bold">
-                    <label htmlFor="inputBirthday">Birth date</label>
-                    <input type="date" className="form-control" id="inputBirthday" placeholder="Location"
-                           value={birthday} onChange={(e) => setBirthday(e.target.value)}
+                    <label htmlFor="inputBio">Bio</label>
+                    <input type="text" className="form-control" id="inputBio" placeholder="Bio"
+                           value={bio} onChange={(e) => setBio(e.target.value)}
                     />
                 </div>
+
+                {/*<div className="form-group pt-4 ms-3 me-3 fw-bold">*/}
+                {/*    <label htmlFor="inputBirthday">Birth date</label>*/}
+                {/*    <input type="date" className="form-control" id="inputBirthday" placeholder="Location"*/}
+                {/*           value={birthday} onChange={(e) => setBirthday(e.target.value)}*/}
+                {/*    />*/}
+                {/*</div>*/}
             </form>
             <br></br>
             <div className="row mt-4">

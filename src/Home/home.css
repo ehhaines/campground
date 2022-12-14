@@ -1,6 +1,33 @@
 .pos-fixed {
     position: fixed;
-    right: 20px;
+    right: 5%;
     top: 15%;
 }
+
+.pos-fixedWelcome {
+    position: fixed;
+    left: 12%;
+    top: 30%;
+}
+
+.pos-fixedInit {
+    position: fixed;
+    left: 20%;
+    top: 50%;
+    color: cyan;
+}
+
+.pos-fixedHi {
+    position: fixed;
+    left: 45%;
+    top: 40%;
+    color: cyan;
+}
+
+.pos-background {
+    height: auto;
+    /*height: 90vh;*/
+}
+
+
 

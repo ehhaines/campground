@@ -65,9 +65,10 @@ const ProfileComponent = () => {
                 </div>
                 <p className="m-0 text-secondary">Email:{currentUser.email}</p>
                 <p className="m-0 text-secondary">Phone:{currentUser.phone}</p>
-                <p className="m-0 text-secondary">Born:{currentUser.dateOfBirth}</p>
+                <div className="fw-bold">bio{currentUser.bio}</div>
                 <br></br>
                 <div>
+
                     <span className="fw-bold">Trips Planned:</span>
                     <RelevantTripsComponent user = {currentUser._id}/>
 

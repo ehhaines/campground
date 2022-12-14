@@ -6,21 +6,36 @@ import "./home.css";
 const HomeComponent = () => {
 
   const {currentUser} = useSelector(state => state.users);
-
-  return(
-      <div className="eh-center w-100 eh-background" style={{backgroundImage: `url("images/campground_homepage.jpg")`}}>
-          <div className="h4 pos-fixed text-warning fst-italic">
-              Add your favorite parks<br></br>
-              Bring your best buddies<br></br>
-              Plan your wonderful trips<br></br>
-              Connect with Mother Nature!
-          </div>
-        <div className="container position-relative">
-          {currentUser && <h1 className="text-success fw-bold fst-italic">Hi, {currentUser.firstName}!</h1>}
-          {!currentUser && <h1 className="text-success fw-bold fst-italic">Welcome to Campground!</h1>}
+    if(currentUser){
+        return(
+            <div className="eh-center w-100 eh-background" style={{backgroundImage: `url("images/campground_homepage.jpg")`}}>
+                <div className="h1 fw-bolder pos-fixedHi fst-italic">
+                    Hi, {currentUser.username}!
+                </div>
+                <div className="eh-background w-100 eh-center" style={{backgroundImage: `linear-gradient(to bottom, rgba(226, 229, 224, 0.2), rgba(226, 229, 224, 0.2)), url("images/loggedinBackground.jpg")`}}>
+                <h1 className="h1 fw-bold fst-italic pos-fixedInit">Start your journey by searching for the right parks!</h1>
+                </div>
+            </div>
+        );
+    } else {
+        return(
+        <div>
+            <div className="eh-center eh-background pos-background" style={{backgroundImage: `url("images/campground_homepage.jpg")`}}>
+                <div className="eh-background w-100 eh-center">
+                    <h1 className="text-success fw-bold fst-italic pos-fixedWelcome">Welcome to Campground!</h1>
+                </div>
+            </div>
+            <p className="ms-5">
+                Campground is a website dedicated to help campers:<br></br>
+                find your favorite parks<br></br>
+                bring your best buddies<br></br>
+                plan your wonderful trips<br></br>
+                and connect with Mother Nature!
+            </p>
         </div>
-      </div>
-  );
+        );
+    }
+
 }
 
 export default HomeComponent;
