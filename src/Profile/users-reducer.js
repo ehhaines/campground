@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {findAllUsersThunk, loginThunk, logoutThunk, profileThunk, registerThunk, updateProfileThunk} from "./users-thunks";
+import {banThunk, findAllUsersThunk, loginThunk, logoutThunk, profileThunk, registerThunk, unbanThunk, updateProfileThunk} from "./users-thunks";
 import {current} from "@reduxjs/toolkit"
 
 const usersReducer = createSlice({
@@ -56,7 +56,12 @@ const usersReducer = createSlice({
         [updateProfileThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload
             console.log("update profile" + JSON.stringify(current(state)))
-
+        },
+        [banThunk.fulfilled]: (state, action) => {
+            console.log(`${action.payload} banned`);
+        },
+        [unbanThunk.fulfilled]: (state, action) => {
+            console.log(`${action.payload} unbanned`)
         }
     }
 })

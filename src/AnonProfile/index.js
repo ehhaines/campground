@@ -7,11 +7,13 @@ import LoadSVG from "../Spin-1s-200px.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHand } from "@fortawesome/free-solid-svg-icons";
 import { faHammer } from "@fortawesome/free-solid-svg-icons";
+import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { faHatCowboySide } from "@fortawesome/free-solid-svg-icons";
 import { findAllTripsThunk } from "../Trip/trips-thunks";
 import TripsComponent from "../Trip/completed-trips";
 import { findModerationsByRangerThunk } from "../Moderations/moderations-thunks";
 import { findFollowsByFollowerThunk, findFollowsByFollowingThunk, followThunk, unfollowThunk } from "../Follows/follows-thunks";
+import { banThunk, unbanThunk } from "../Profile/users-thunks";
 
 
 const AnonUserComponent = () => {
@@ -22,6 +24,8 @@ const AnonUserComponent = () => {
 
   const params = useParams();
   const username = params.username;
+
+  const [hasClicked, setHasClicked] = useState(false);
 
   const {anonUser, anonUserLoading} = useSelector(state => state.anonUser);
   const {moderations, moderationsLoading} = useSelector(state => state.moderations);
@@ -56,7 +60,7 @@ const AnonUserComponent = () => {
         <div>
           <div className="row mt-3 pt-3">
             <div className="col-md-4 display-6 text-secondary">
-              <div className="text-center">{anonUser[0].username}</div>
+              <div className="text-center">{anonUser[0].isBanned && <FontAwesomeIcon icon={faBan} color="red"/>}{anonUser[0].username}{anonUser[0].isBanned && <FontAwesomeIcon icon={faBan} color="red"/>}</div>
               {!moderationsLoading && (moderations.length > 0 && <div className="text-center h5 mt-1"><FontAwesomeIcon icon={faHatCowboySide} color="brown"/> Ranger: <span onClick={() => nav(`/details/${moderations[0].parkCode}`)} style={{"cursor": "pointer"}}>{moderations[0].parkCode}</span></div>)}
               {anonUser[0].type === "ADMIN" && <div className="text-center h5 mt-1"><FontAwesomeIcon icon={faHammer} color="green"/> Admin <FontAwesomeIcon icon={faHammer} color="green"/></div>}
               <div className="row">
@@ -89,7 +93,18 @@ const AnonUserComponent = () => {
               </div>
               {currentUser.type === "ADMIN" && 
               <div className="text-center">
-                <button className="btn btn-danger my-3 w-50">Ban</button>
+                {!anonUser[0].isBanned && <button className="btn btn-danger my-3 w-50" onClick={() => 
+                  {
+                    dispatch(banThunk(username));
+                    setHasClicked(true)
+                  }
+                }>Ban</button>}
+                {anonUser[0].isBanned && <button className="btn btn-warning my-3 w-50" onClick={() => 
+                  {
+                    dispatch(unbanThunk(username));
+                    setHasClicked(true)
+                  }
+                }>Unban</button>}
               </div>}
             </div>
             <div className="col-md-8">

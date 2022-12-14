@@ -29,3 +29,14 @@ export const updateProfile = async (currentUser) => {
     const response = await  axios.put(`${BASE_URL}/users/${currentUser._id}`, currentUser);
     return currentUser;
 }
+
+export const ban = async (username) => {
+    console.log(username)
+    await axios.put(`${BASE_URL}/ban/${username}`);
+    return username;
+}
+
+export const unban = async (username) => {
+    await axios.put(`${BASE_URL}/unban/${username}`);
+    return username;
+}

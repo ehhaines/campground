@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {findAllUsers, register, login, logout, profile, updateProfile} from "./users-service";
+import {findAllUsers, register, login, logout, profile, updateProfile, ban, unban} from "./users-service";
 export const findAllUsersThunk = createAsyncThunk(
     'findAllUsers',
     async () => await findAllUsers()
@@ -30,3 +30,13 @@ export const updateProfileThunk = createAsyncThunk(
         return await updateProfile(thunkAPI)
     }
 )
+
+export const banThunk = createAsyncThunk(
+    'ban',
+    (username) => ban(username)
+);
+
+export const unbanThunk = createAsyncThunk(
+    'unban',
+    async (username) => await unban(username)
+);
