@@ -6,16 +6,16 @@ import npsReducer from "../nps/nps-reducer";
 import parksReducer from "../Park/parks-reducer";
 import reviewsReducer from '../Review/reviews-reducer';
 import anonUserReducer from '../AnonProfile/anon-user-reducer';
-import friendshipsReducer from '../Friendship/friendships-reducer';
 import tripsReducer from '../Trip/trips-reducer';
 import alertsReducer from '../Alert/alerts-reducer';
 import moderationsReducer from '../Moderations/moderations-reducer';
+import followsReducer from '../Follows/follows-reducer';
 
 
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['nps', 'parks', 'reviews', 'anonUser', 'friendships', 'trips', 'alerts', 'moderations'],
+    blacklist: ['nps', 'parks', 'reviews', 'anonUser', 'trips', 'alerts', 'moderations', 'follows'],
     whitelist: ['users']
 }
 const reducers = combineReducers({
@@ -24,9 +24,9 @@ const reducers = combineReducers({
     parks: parksReducer,
     reviews: reviewsReducer,
     anonUser: anonUserReducer,
-    friendships: friendshipsReducer,
     trips: tripsReducer,
     alerts: alertsReducer,
+    follows: followsReducer,
     moderations: moderationsReducer
 });
 const persistedReducer = persistReducer(persistConfig, reducers);

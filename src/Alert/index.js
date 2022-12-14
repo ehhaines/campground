@@ -25,8 +25,7 @@ const AlertItem = ({alert}) => {
           <div className="col-6 h5 text-danger"><FontAwesomeIcon icon={faCircleExclamation}/> ALERT</div>
           <div className="col text-end">
             <span className="me-1 text-secondary">{alert.datePosted}</span>
-            {(currentUser && moderations.length > 0) && 
-              ((currentUser.type === "RANGER" && currentUser._id === moderations[0].ranger) && 
+            {currentUser && (currentUser.type === "RANGER" && 
               <button className="btn" onClick={() => {dispatch(resolveAlertThunk(alert._id))}}><FontAwesomeIcon icon={faX}/></button>)}
           </div>
         </div>
