@@ -52,13 +52,9 @@ const ProfileComponent = () => {
                 </div>
                 <p className="m-0 text-secondary">Email:{currentUser.email}</p>
                 <p className="m-0 text-secondary">Phone:{currentUser.phone}</p>
-                <p className="m-0 text-secondary">Born:{currentUser.dateOfBirth}</p>
+                <div className="fw-bold">bio{currentUser.bio}</div>
                 <br></br>
                 <div>
-                    <span className="fw-bold">Favorite Parks</span>
-                    <br></br>
-                    <span className="text-secondary">{currentUser.favoriteParks}</span>
-                    <br></br><br></br>
                     <span className="fw-bold">TripsPlanned</span>
                     <br></br>
                     <span className="text-secondary">{currentUser.tripsPlanned}</span>

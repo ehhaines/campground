@@ -19,17 +19,20 @@ const HomeComponent = () => {
         );
     } else {
         return(
-            <div className="eh-center w-100 eh-background" style={{backgroundImage: `url("images/campground_homepage.jpg")`}}>
-                <div className="h4 pos-fixed text-warning fst-italic">
-                    Add your favorite parks<br></br>
-                    Bring your best buddies<br></br>
-                    Plan your wonderful trips<br></br>
-                    Connect with Mother Nature!
-                </div>
-                <div className="eh-background w-100 eh-center" style={{backgroundImage: `url("images/campground_homepage.jpg")`}}>
+        <div>
+            <div className="eh-center eh-background pos-background" style={{backgroundImage: `url("images/campground_homepage.jpg")`}}>
+                <div className="eh-background w-100 eh-center">
                     <h1 className="text-success fw-bold fst-italic pos-fixedWelcome">Welcome to Campground!</h1>
                 </div>
             </div>
+            <p className="ms-5">
+                Campground is a website dedicated to help campers:<br></br>
+                find your favorite parks<br></br>
+                bring your best buddies<br></br>
+                plan your wonderful trips<br></br>
+                and connect with Mother Nature!
+            </p>
+        </div>
         );
     }
 
