@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import "../offset.css";
@@ -15,6 +15,10 @@ import { findFollowsByFollowerThunk, findFollowsByFollowingThunk, followThunk, u
 
 
 const AnonUserComponent = () => {
+
+  function refreshPage(){ 
+    window.location.reload(); 
+  }
 
   const params = useParams();
   const username = params.username;
@@ -60,18 +64,26 @@ const AnonUserComponent = () => {
                 <div className="col text-center h5">Following: {following && <span>{following.length}</span>}</div>
               </div>
               <div className="text-center">
-                {!followers.filter(f => f.follower === currentUser.username).length && <button className="btn btn-primary my-3 w-50" onClick={() => 
+                {(!followers.filter(f => f.follower === currentUser.username).length) && <button className="btn btn-primary my-3 w-50" onClick={() => {
                 dispatch(followThunk(
                   {
                     follower: currentUser.username,
                     following: username
                   }
-                ))}>
+                ))
+                refreshPage();
+                }
+                }>
                   Follow
                 </button>}
-                {console.log(followers.filter(f => f.follower === currentUser.username).length)}
-                {followers.filter(f => f.follower === currentUser.username).length > 0 && <button className="btn btn-secondary my-3 w-50" onClick={() => 
-                dispatch(unfollowThunk(followers.filter(f => f.follower === currentUser.username[0]._id)))}>
+                {(followers.filter(f => f.follower === currentUser.username).length > 0) && <button className="btn btn-secondary my-3 w-50" 
+                  onClick={() => {
+                    const filtered = followers.filter(f => f.follower === currentUser.username);
+                    const id = filtered[0]._id
+                    dispatch(unfollowThunk(id));
+                    refreshPage();
+                  }
+                }>
                   Unfollow
                 </button>}
               </div>

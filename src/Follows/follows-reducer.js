@@ -32,7 +32,7 @@ const followsReducer = createSlice({
       state.followers.unshift(action.payload);
     },
     [unfollowThunk.fulfilled]: (state, action) => {
-      state.following = state.follows.filter(fol => fol._id !== action.payload._id);
+      state.followers.filter(fol => fol._id !== action.payload._id);
     }
   }
 });
