@@ -10,21 +10,29 @@ import { findParkByCodeThunk } from "./parks-thunks";
 import { findNpsParkByParkCodeThunk } from "../nps/nps-thunk";
 import LoadSVG from "../Spin-1s-200px.svg";
 import { createTripThunk } from "../Trip/trips-thunks";
+import { createAlertThunk, findAlertsByParkThunk } from "../Alert/alerts-thunks";
+import AlertItem from "../Alert";
 
 const ParkComponent = () => {
 
   const params = useParams();
   const thisPark = params.park;
 
+  const [isCreatingAlert, setIsCreatingAlert] = useState(false);
   const [isCreatingTrip, setIsCreatingTrip] = useState(false);
   const [tripCreated, setTripCreated] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [notes, setNotes] = useState("");
+  const [alertBody, setAlertBody] = useState("");
 
   const {reviews, reviewsLoading} = useSelector((state) => state.reviews);
   const {npsPark, npsLoading} = useSelector((state) => state.nps);
   const {currentUser} = useSelector(state => state.users);
+  const {alerts, alertsLoading} = useSelector(state => state.alerts);
+
+  let today = new Date();
+  today = today.toLocaleDateString();
 
   const calculateR = (rating) => {
     if (rating >= 5) {
@@ -54,16 +62,19 @@ const ParkComponent = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(findParkByCodeThunk(thisPark))
-    dispatch(findNpsParkByParkCodeThunk(thisPark))
+    dispatch(findParkByCodeThunk(thisPark));
+    dispatch(findNpsParkByParkCodeThunk(thisPark));
+    dispatch(findAlertsByParkThunk(thisPark));
   }, []);
 
   return(
     <div className="eh-offset">
       {npsLoading &&
       <div className="text-center">
-      <img src={LoadSVG} alt="...Loading..." />
-    </div>}
+        {console.log(today)}
+        <img src={LoadSVG} alt="...Loading..." />
+      </div>
+      }
       {!npsLoading && <div>
         <div className="container">
           <div className="row my-3">
@@ -77,7 +88,7 @@ const ParkComponent = () => {
                   }>{calcAvgRating()}</span> / 10
                 </div>}
                 {currentUser && <div>
-                  {!isCreatingTrip && <button className="btn btn-primary mt-3" onClick={() => setIsCreatingTrip(true)}>Create trip</button>}
+                  {!isCreatingTrip && <button className="btn btn-primary my-3" onClick={() => setIsCreatingTrip(true)}>Create trip</button>}
                   {isCreatingTrip &&
                     <div>
                       <div className="input-group">
@@ -123,6 +134,40 @@ const ParkComponent = () => {
               </div>
             </div>
             <div className="col-md-8 text-secondary mb-3 pb-3">
+              {!alertsLoading && <ul className="list-group mb-3">
+                {
+                  alerts.map(alert => <AlertItem alert={alert}/>)
+                }
+              </ul>}
+              {currentUser && (currentUser.type === "RANGER" && 
+                <div>
+                  {!isCreatingAlert && 
+                  <div className="text-center">
+                    <button className="btn btn-danger" onClick={() => {setIsCreatingAlert(true)}}>Create alert</button>
+                  </div>}
+                  {isCreatingAlert && <div className="mb-3">
+                    <div className="form-group">
+                      <label htmlFor="notes">Alert body:</label>
+                      <textarea className="form-control" id="notes" rows="2" value={alertBody} onChange={e => setAlertBody(e.target.value)}></textarea>
+                    </div>
+                    <div className="row mt-2">
+                      <div className="text-center col-6">
+                        <button className="btn btn-secondary w-75" onClick={() => {setIsCreatingAlert(false)}}>Cancel</button>
+                      </div>
+                      <div className="text-center col-6">
+                        <button className="btn btn-danger w-75" onClick={() => {dispatch(createAlertThunk(
+                          {
+                            ranger: currentUser,
+                            parkCode: npsPark.parkCode,
+                            datePosted: today,
+                            alert: alertBody
+                          }
+                        ))}}>Create</button>
+                      </div>
+                    </div>
+                  </div>}
+                </div>)
+              }
               <div className="text-dark h5">Description:</div>
               <div>{npsPark.description}</div>
               <br></br><br></br>
