@@ -38,8 +38,10 @@ const RelevantTripsComponent = (user) => {
                         {
                             relevantTrips().map(trip =>
                                 <li className="list-group-item" key={`${trip.parkCode}${trip.startDate}${trip.endDate}`}>
+                                    <input type="checkbox" className="m-lg-2" checked={trip.isCompleted}
+                                           onChange={() => {handleCheckBox(trip._id)}}/>
                                     <span className="text-secondary h5" style={{"cursor": "pointer"}} onClick={() => nav(`/details/${trip.parkCode}`)}>{trip.parkName}</span>
-                                    <input type="checkbox" className="m-lg-2" checked={trip.isCompleted} onChange={() => handleCheckBox(trip._id)}/>
+
                                     <span className="float-end text-secondary">{trip.startDate} - {trip.endDate} <i className="bi bi-x-lg m-lg-1" onClick={() => handleDeleteTrip(trip._id)}></i></span>
                                 </li>)
                         }
