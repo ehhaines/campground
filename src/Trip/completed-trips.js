@@ -36,7 +36,7 @@ const CompletedTripsComponent = (user) => {
                 </li>)
             }
           </ul>
-          {completedTrips().length == 0 && <div className="text-secondary">No trips to show.</div>}
+          {completedTrips().length === 0 && <div className="text-secondary">No trips to show.</div>}
         </div>
       }
     </div>

@@ -8,12 +8,13 @@ import reviewsReducer from '../Review/reviews-reducer';
 import anonUserReducer from '../AnonProfile/anon-user-reducer';
 import friendshipsReducer from '../Friendship/friendships-reducer';
 import tripsReducer from '../Trip/trips-reducer';
+import alertsReducer from '../Alert/alerts-reducer';
 
 
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['nps', 'parks', 'reviews', 'anonUser', 'friendships', 'trips'],
+    blacklist: ['nps', 'parks', 'reviews', 'anonUser', 'friendships', 'trips', 'alerts'],
     whitelist: ['users']
 }
 const reducers = combineReducers({
@@ -23,7 +24,8 @@ const reducers = combineReducers({
     reviews: reviewsReducer,
     anonUser: anonUserReducer,
     friendships: friendshipsReducer,
-    trips: tripsReducer
+    trips: tripsReducer,
+    alerts: alertsReducer
 });
 const persistedReducer = persistReducer(persistConfig, reducers);
 
