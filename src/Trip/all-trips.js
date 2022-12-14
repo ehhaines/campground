@@ -46,7 +46,7 @@ const RelevantTripsComponent = (user) => {
                                 </li>)
                         }
                     </ul>
-                    {relevantTrips().length == 0 && <div className="text-secondary">No trips to show.</div>}
+                    {relevantTrips().length === 0 && <div className="text-secondary">No trips to show.</div>}
                 </div>
             }
         </div>

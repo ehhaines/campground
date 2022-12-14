@@ -12,6 +12,7 @@ import LoadSVG from "../Spin-1s-200px.svg";
 import { createTripThunk } from "../Trip/trips-thunks";
 import { createAlertThunk, findAlertsByParkThunk } from "../Alert/alerts-thunks";
 import AlertItem from "../Alert";
+import { findModerationsByRangerThunk } from "../Moderations/moderations-thunks";
 
 const ParkComponent = () => {
 
@@ -30,6 +31,7 @@ const ParkComponent = () => {
   const {npsPark, npsLoading} = useSelector((state) => state.nps);
   const {currentUser} = useSelector(state => state.users);
   const {alerts, alertsLoading} = useSelector(state => state.alerts);
+  const {moderations, moderationsLoading} = useSelector(state => state.moderations);
 
   let today = new Date();
   today = today.toLocaleDateString();
@@ -65,13 +67,13 @@ const ParkComponent = () => {
     dispatch(findParkByCodeThunk(thisPark));
     dispatch(findNpsParkByParkCodeThunk(thisPark));
     dispatch(findAlertsByParkThunk(thisPark));
+    dispatch(findModerationsByRangerThunk(currentUser._id))
   }, []);
 
   return(
     <div className="eh-offset">
       {npsLoading &&
       <div className="text-center">
-        {console.log(today)}
         <img src={LoadSVG} alt="...Loading..." />
       </div>
       }
@@ -88,7 +90,6 @@ const ParkComponent = () => {
                   }>{calcAvgRating()}</span> / 10
                 </div>}
                 {currentUser && <div>
-                  {!isCreatingTrip && <button className="btn btn-primary my-3" onClick={() => setIsCreatingTrip(true)}>Create trip</button>}
                   {isCreatingTrip &&
                     <div>
                       <div className="input-group">
@@ -128,19 +129,20 @@ const ParkComponent = () => {
                       </div>
                     </div>
                   }
-                  {console.log(currentUser)}
                   {tripCreated && <div className="text-secondary my-3">Your Trip has been created!</div>}
                 </div>}
               </div>
             </div>
-            <div className="col-md-8 text-secondary mb-3 pb-3">
+            <div className="col-md-8 text-secondary">
+              {console.log(currentUser, moderations.length, currentUser.type, currentUser._id)}
               {!alertsLoading && <ul className="list-group mb-3">
                 {
                   alerts.map(alert => <AlertItem alert={alert}/>)
                 }
               </ul>}
-              {currentUser && (currentUser.type === "RANGER" && 
+              {(currentUser && moderations.length > 0) && ((currentUser.type === "RANGER" && (currentUser._id === moderations[0].ranger && moderations[0].parkCode === npsPark.parkCode)) && 
                 <div>
+                  {console.log(isCreatingAlert)}
                   {!isCreatingAlert && 
                   <div className="text-center">
                     <button className="btn btn-danger" onClick={() => {setIsCreatingAlert(true)}}>Create alert</button>
@@ -152,7 +154,10 @@ const ParkComponent = () => {
                     </div>
                     <div className="row mt-2">
                       <div className="text-center col-6">
-                        <button className="btn btn-secondary w-75" onClick={() => {setIsCreatingAlert(false)}}>Cancel</button>
+                        <button className="btn btn-secondary w-75" onClick={() => {
+                          setIsCreatingAlert(false);
+                          setAlertBody("");
+                          }}>Cancel</button>
                       </div>
                       <div className="text-center col-6">
                         <button className="btn btn-danger w-75" onClick={() => {dispatch(createAlertThunk(

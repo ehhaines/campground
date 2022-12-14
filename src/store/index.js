@@ -9,12 +9,13 @@ import anonUserReducer from '../AnonProfile/anon-user-reducer';
 import friendshipsReducer from '../Friendship/friendships-reducer';
 import tripsReducer from '../Trip/trips-reducer';
 import alertsReducer from '../Alert/alerts-reducer';
+import moderationsReducer from '../Moderations/moderations-reducer';
 
 
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['nps', 'parks', 'reviews', 'anonUser', 'friendships', 'trips', 'alerts'],
+    blacklist: ['nps', 'parks', 'reviews', 'anonUser', 'friendships', 'trips', 'alerts', 'moderations'],
     whitelist: ['users']
 }
 const reducers = combineReducers({
@@ -25,7 +26,8 @@ const reducers = combineReducers({
     anonUser: anonUserReducer,
     friendships: friendshipsReducer,
     trips: tripsReducer,
-    alerts: alertsReducer
+    alerts: alertsReducer,
+    moderations: moderationsReducer
 });
 const persistedReducer = persistReducer(persistConfig, reducers);
 
