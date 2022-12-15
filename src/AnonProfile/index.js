@@ -11,9 +11,9 @@ import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { faHatCowboySide } from "@fortawesome/free-solid-svg-icons";
 import { findAllTripsThunk } from "../Trip/trips-thunks";
 import TripsComponent from "../Trip/completed-trips";
-import { findModerationsByRangerThunk } from "../Moderations/moderations-thunks";
+import { createModerationThunk, findModerationsByRangerThunk } from "../Moderations/moderations-thunks";
 import { findFollowsByFollowerThunk, findFollowsByFollowingThunk, followThunk, unfollowThunk } from "../Follows/follows-thunks";
-import { banThunk, unbanThunk } from "../Profile/users-thunks";
+import { banThunk, demoteToUserThunk, makeRangerThunk, unbanThunk } from "../Profile/users-thunks";
 
 
 const AnonUserComponent = () => {
@@ -51,7 +51,8 @@ const AnonUserComponent = () => {
         <div className="my-3 py-3 display-1"><FontAwesomeIcon icon={faHand} color="red"/></div>
         <span>You must be <a href="/login">logged in</a> to view this page.</span>
       </div>}
-      {currentUser && <div>
+      {(currentUser && currentUser.isBanned) && <div className="text-center display-1"><FontAwesomeIcon icon={faBan} color="red"/><div>YOU ARE BANNED</div></div>}
+      {(currentUser && !currentUser.isBanned) && <div>
         {anonUserLoading &&
         <div className="text-center">
           <img src={LoadSVG} alt="...Loading..." />
@@ -105,6 +106,30 @@ const AnonUserComponent = () => {
                     setHasClicked(true)
                   }
                 }>Unban</button>}
+                {/* {anonUser[0].type === "USER" && 
+                <div>
+                  <button className="btn btn-success my-3 w-50" onClick={() => 
+                    {
+                      dispatch(makeRangerThunk(username));
+                      dispatch(createModerationThunk(
+                        {
+
+                        }
+                      ))
+                      setHasClicked(true)
+                    }
+                  }>Make ranger</button>
+                </div>} */}
+                {anonUser[0].type === "RANGER" && 
+                <div>
+                  <button className="btn btn-success my-3 w-50" onClick={() => 
+                    {
+                      dispatch(demoteToUserThunk(username));
+                      
+                      setHasClicked(true)
+                    }
+                  }>Demote to user</button>
+                </div>}
               </div>}
             </div>
             <div className="col-md-8">

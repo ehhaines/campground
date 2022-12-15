@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faBan } from "@fortawesome/free-solid-svg-icons";
 import "../offset.css";
 import "./index.css";
 import ReviewsListComponent from "../Review";
@@ -72,12 +73,13 @@ const ParkComponent = () => {
 
   return(
     <div className="eh-offset">
-      {npsLoading &&
+      {(npsLoading && !currentUser.isBanned) &&
       <div className="text-center">
         <img src={LoadSVG} alt="...Loading..." />
       </div>
       }
-      {!npsLoading && <div>
+      {currentUser.isBanned && <div className="text-center display-1"><FontAwesomeIcon icon={faBan} color="red"/><div>YOU ARE BANNED</div></div>}
+      {(!npsLoading && !currentUser.isBanned) && <div>
         <div className="container">
           <div className="row my-3">
             <div className="col-md-4 text-center text-dark">

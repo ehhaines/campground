@@ -40,3 +40,14 @@ export const unban = async (username) => {
     await axios.put(`${BASE_URL}/unban/${username}`);
     return username;
 }
+
+export const makeRanger = async (username) => {
+    await axios.put(`${BASE_URL}/make-ranger/${username}`);
+    return username;
+}
+
+export const demoteToUser = async (username) => {
+    const status = await axios.put(`${BASE_URL}/make-user/${username}`);
+    console.log(status);
+    return username;
+}

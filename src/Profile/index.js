@@ -9,14 +9,18 @@ import LoadSVG from "../Spin-1s-200px.svg";
 import {useNavigate} from "react-router";
 import AllTrips from "../Trip/all-trips";
 import RelevantTripsComponent from "../Trip/all-trips";
+import { findFollowsByFollowerThunk, findFollowsByFollowingThunk } from "../Follows/follows-thunks";
 
 const ProfileComponent = () => {
     const {currentUser} = useSelector(state => state.users);
+    const {followers, following, followerLoading, followingLoading} = useSelector(state => state.follows);
 
     const dispatch = useDispatch();
     const nav = useNavigate();
     useEffect(() => {
-        dispatch(findAllTripsThunk())
+        dispatch(findAllTripsThunk());
+        dispatch(findFollowsByFollowingThunk(currentUser.username));
+        dispatch(findFollowsByFollowerThunk(currentUser.username));
     }, []);
     const handleLogout = () => {
         dispatch(logoutThunk())

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { banThunk, unbanThunk } from "../Profile/users-thunks";
+import { banThunk, demoteToUserThunk, makeRangerThunk, unbanThunk } from "../Profile/users-thunks";
 import { findUserByUsernameThunk } from "./anon-user-thunks";
 
 const initialState = {
@@ -24,6 +24,12 @@ const anonUserReducer = createSlice({
     },
     [unbanThunk.fulfilled]: (state, action) => {
       state.anonUser[0].isBanned = false;
+    },
+    [makeRangerThunk.fulfilled]: (state, action) => {
+      state.anonUser[0].type = "RANGER";
+    },
+    [demoteToUserThunk.fulfilled]: (state, action) => {
+      state.anonUser[0].type = "USER";
     }
   }
 });
