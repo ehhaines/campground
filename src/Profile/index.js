@@ -64,8 +64,6 @@ const ProfileComponent = () => {
                 <h3 className="m-0 fw-bold">{currentUser.username}</h3>
                 <div className="text-secondary pb-2">
                     <i className="bi bi-geo-alt"></i>{currentUser.location}
-                    <i className="bi bi-calendar ms-2"></i>{currentUser.dateJoined}
-                    <i className="bi bi-balloon ms-2"></i>{currentUser.numOfTrips}
                 </div>
                 <p className="m-0 text-secondary">Email:{currentUser.email}</p>
                 <p className="m-0 text-secondary">Phone:{currentUser.phone}</p>
