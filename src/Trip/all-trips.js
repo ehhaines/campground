@@ -15,7 +15,7 @@ const RelevantTripsComponent = (user) => {
 
     useEffect(() => {
         dispatch(findAllTripsThunk())
-    }, []);
+    }, [dispatch]);
     const handleDeleteTrip = (tripID) => {
         dispatch(deleteTripThunk(tripID))
         dispatch(findAllTripsThunk())
@@ -42,7 +42,8 @@ const RelevantTripsComponent = (user) => {
                                            onChange={() => {handleCheckBox(trip._id)}}/>
                                     <span className="text-secondary h5" style={{"cursor": "pointer"}} onClick={() => nav(`/details/${trip.parkCode}`)}>{trip.parkName}</span>
 
-                                    <span className="float-end text-secondary">{trip.startDate} - {trip.endDate} <i className="bi bi-x-lg m-lg-1" onClick={() => handleDeleteTrip(trip._id)}></i></span>
+                                    <span className="float-end text-secondary">{trip.startDate} to {trip.endDate} <i className="bi bi-x-lg m-lg-1" onClick={() => handleDeleteTrip(trip._id)}></i></span>
+                                    <div className="text-secondary">{trip.notes}</div>
                                 </li>)
                         }
                     </ul>

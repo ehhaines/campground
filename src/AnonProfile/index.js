@@ -40,7 +40,7 @@ const AnonUserComponent = () => {
     dispatch(findAllTripsThunk());
     dispatch(findFollowsByFollowerThunk(username));
     dispatch(findFollowsByFollowingThunk(username));
-  }, []);
+  }, [dispatch, username]);
 
   const nav = useNavigate();
 

@@ -27,13 +27,13 @@ const ReviewsListComponent = () => {
   const params = useParams();
   const thisPark = params.park;
 
-  const {reviews, reviewsLoading} = useSelector((state) => state.reviews)
+  const {reviews} = useSelector((state) => state.reviews)
   const {currentUser} = useSelector((state) => state.users);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(findReviewsByParkThunk(thisPark));
-  }, []);
+  }, [dispatch, thisPark]);
 
   const reviewsPerPage = 5;
   const [reviewOffset, setReviewOffset] = useState(0);

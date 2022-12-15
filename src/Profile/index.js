@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import "./profile.css";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {logoutThunk} from "./users-thunks";
-import CompletedTripsComponent from "../Trip/completed-trips";
-import {deleteTripThunk, findAllTripsThunk} from "../Trip/trips-thunks";
-import LoadSVG from "../Spin-1s-200px.svg";
+// import CompletedTripsComponent from "../Trip/completed-trips";
+import {findAllTripsThunk} from "../Trip/trips-thunks";
+// import LoadSVG from "../Spin-1s-200px.svg";
 import {useNavigate} from "react-router";
-import AllTrips from "../Trip/all-trips";
+// import AllTrips from "../Trip/all-trips";
 import RelevantTripsComponent from "../Trip/all-trips";
 import { findFollowsByFollowerThunk, findFollowsByFollowingThunk } from "../Follows/follows-thunks";
 
@@ -21,7 +21,7 @@ const ProfileComponent = () => {
         dispatch(findAllTripsThunk());
         dispatch(findFollowsByFollowerThunk(currentUser.username));
         dispatch(findFollowsByFollowingThunk(currentUser.username));
-    }, []);
+    }, [dispatch, currentUser.username]);
     const handleLogout = () => {
         dispatch(logoutThunk())
     }
@@ -66,7 +66,6 @@ const ProfileComponent = () => {
                     <i className="bi bi-geo-alt"></i>{currentUser.location}
                 </div>
                 <p className="m-0 text-secondary">Email: {currentUser.email}</p>
-                <p className="m-0 text-secondary">Phone: {currentUser.phone}</p>
                 <div className="text-secondary">Bio: {currentUser.bio}</div>
                 <br></br>
                 <div>

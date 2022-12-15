@@ -68,7 +68,7 @@ const ParkComponent = () => {
     dispatch(findNpsParkByParkCodeThunk(thisPark));
     dispatch(findAlertsByParkThunk(thisPark));
     dispatch(findModerationsByParkThunk(thisPark));
-  }, [dispatch]);
+  }, [dispatch, thisPark]);
 
   return(
     <div className="eh-offset">
