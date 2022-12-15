@@ -19,7 +19,7 @@ const NpsSearchResults = () => {
 
   useEffect(() => {
     dispatch(findParksBySearchTermThunk(params.park))
-  }, []);
+  }, [dispatch, params.park]);
 
   return(
     <div>

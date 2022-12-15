@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { findParksBySearchTermThunk } from "../nps-thunk";
+import React, { useState } from "react";
 import "./nps.css";
 import { useNavigate } from "react-router";
 
 const NpsSearch = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
-  const dispatch = useDispatch();
 
   const nav = useNavigate();
 
-  useEffect(() => {
-    dispatch(findParksBySearchTermThunk(searchTerm))
-  }, []);
 
   return(
     <div>
