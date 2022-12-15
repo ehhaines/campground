@@ -49,11 +49,10 @@ const HomeComponent = () => {
                 <div className="bg-dark py-3">
                     <span className="pos-descriptionText fst-italic text-secondary display-6 py-3 my-3">Your upcoming trips:</span>
                 </div>
-                {trips.length > 0 && console.log(trips.filter(t => t.user === currentUser._id && !t.isCompleted), trips)}
                 {trips.length > 0 && (trips.filter(t => t.user === currentUser._id && !t.isCompleted).length > 0 &&
                     <ul className="list-group">
                         {trips.filter(t => t.user === currentUser._id && !t.isCompleted).map(t => 
-                            <li className="list-group-item my-3 border-0">
+                            <li className="list-group-item my-3 border-0" key={t._id}>
                                 <div><span className="h5 text-secondary" onClick={() => nav(`/details/${t.parkCode}`)} style={{"cursor": "pointer"}}>{t.parkName}</span><span className="float-end text-secondary">{t.startDate} to {t.endDate}</span></div>
                                 <div className="text-secondary">{t.notes}</div>
                             </li>
