@@ -65,8 +65,8 @@ const ProfileComponent = () => {
                 <div className="text-secondary pb-2">
                     <i className="bi bi-geo-alt"></i>{currentUser.location}
                 </div>
-                <p className="m-0 text-secondary">Email:{currentUser.email}</p>
-                <p className="m-0 text-secondary">Phone:{currentUser.phone}</p>
+                <p className="m-0 text-secondary">Email: {currentUser.email}</p>
+                <p className="m-0 text-secondary">Phone: {currentUser.phone}</p>
                 <div className="text-secondary">Bio: {currentUser.bio}</div>
                 <br></br>
                 <div>
