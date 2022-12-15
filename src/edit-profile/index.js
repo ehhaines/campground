@@ -39,7 +39,7 @@ const EditProfile = () => {
     }
 
     return (
-        <div>
+        <div className="container">
             {currentUser &&
         <div>
         <div className="row margin-top">
@@ -104,7 +104,7 @@ const EditProfile = () => {
                 </div>
                 <div className="form-group pt-4 ms-3 me-3 fw-bold">
                     <label htmlFor="inputBio">Bio</label>
-                    <input type="text" className="form-control" id="inputBio" placeholder="Bio"
+                    <textarea className="form-control" id="inputBio" placeholder="Bio information"
                            value={bio} onChange={(e) => setBio(e.target.value)}
                     />
                 </div>
@@ -118,13 +118,12 @@ const EditProfile = () => {
             </form>
             <br></br>
             <div className="row mt-4">
-                <div className="col-1">
+                <div className="col ms-2">
                     <Link to="/profile">
-                        <i className="btn btn-dark rounded-pill float-end">Cancel</i>
+                        <i className="btn btn-dark rounded-pill float-start">Cancel</i>
                     </Link>
                 </div>
-                <div className="col-6"></div>
-                <div className="col pe-5">
+                <div className="col me-2">
                     <button
                         className="btn btn-dark rounded-pill float-end"
                         onClick={updateProfileHandler}

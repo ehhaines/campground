@@ -25,13 +25,16 @@ const HomeComponent = () => {
                     <h1 className="text-success fw-bold fst-italic pos-fixedWelcome">Welcome to Campground!</h1>
                 </div>
             </div>
-            <p className="ms-5">
-                Campground is a website dedicated to help campers:<br></br>
-                find your favorite parks<br></br>
-                bring your best buddies<br></br>
-                plan your wonderful trips<br></br>
+            <div className="pos-descriptionColor">
+                <p className="pos-descriptionText fw-bold fst-italic">
+                Campground is a website dedicated for campers!<br></br>
+                Here you can:<br></br>
+                find your favorite parks,<br></br>
+                bring your best buddies,<br></br>
+                plan your wonderful trips,<br></br>
                 and connect with Mother Nature!
-            </p>
+                </p>
+            </div>
         </div>
         );
     }

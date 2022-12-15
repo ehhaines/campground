@@ -29,5 +29,14 @@
     /*height: 90vh;*/
 }
 
+.pos-descriptionColor{
+    background: lightblue;
+    color: cornflowerblue;
+}
+
+.pos-descriptionText{
+    margin-left: 3%;
+}
+
 
 
