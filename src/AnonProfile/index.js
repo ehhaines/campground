@@ -11,9 +11,9 @@ import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { faHatCowboySide } from "@fortawesome/free-solid-svg-icons";
 import { findAllTripsThunk } from "../Trip/trips-thunks";
 import TripsComponent from "../Trip/completed-trips";
-import { findModerationsByRangerThunk } from "../Moderations/moderations-thunks";
+import { createModerationThunk, findModerationsByRangerThunk, unmodThunk } from "../Moderations/moderations-thunks";
 import { findFollowsByFollowerThunk, findFollowsByFollowingThunk, followThunk, unfollowThunk } from "../Follows/follows-thunks";
-import { banThunk, unbanThunk } from "../Profile/users-thunks";
+import { banThunk, demoteRangerThunk, makeRangerThunk, unbanThunk } from "../Profile/users-thunks";
 
 
 const AnonUserComponent = () => {
@@ -25,12 +25,12 @@ const AnonUserComponent = () => {
   const params = useParams();
   const username = params.username;
 
-  const [hasClicked, setHasClicked] = useState(false);
+  const [park, setPark] = useState("");
 
   const {anonUser, anonUserLoading} = useSelector(state => state.anonUser);
   const {moderations, moderationsLoading} = useSelector(state => state.moderations);
   const {currentUser} = useSelector((state) => state.users);
-  const {followers, following, followersLoading, followingLoading} = useSelector((state) => state.follows);
+  const {followers, following} = useSelector((state) => state.follows);
 
   const dispatch = useDispatch();
 
@@ -96,15 +96,42 @@ const AnonUserComponent = () => {
                 {!anonUser[0].isBanned && <button className="btn btn-danger my-3 w-50" onClick={() => 
                   {
                     dispatch(banThunk(username));
-                    setHasClicked(true)
                   }
                 }>Ban</button>}
                 {anonUser[0].isBanned && <button className="btn btn-warning my-3 w-50" onClick={() => 
                   {
                     dispatch(unbanThunk(username));
-                    setHasClicked(true)
                   }
                 }>Unban</button>}
+              </div>}
+              {currentUser.type === "ADMIN" && 
+              <div className="text-center">
+                {anonUser[0].type === "RANGER" && <button className="btn btn-info my-3 w-50" onClick={() => 
+                  {
+                    dispatch(demoteRangerThunk(username));
+                    dispatch(unmodThunk(anonUser[0].username));
+                    refreshPage();
+                  }
+                }>Make user</button>}
+                {anonUser[0].type === "USER" && 
+                <div>
+                  <button className="btn btn-info my-3 w-50" onClick={() => 
+                    {
+                      dispatch(makeRangerThunk(username));
+                      dispatch(createModerationThunk({
+                        parkCode: park,
+                        ranger: anonUser[0].username
+                      }));
+                    }
+                  }>Make ranger
+                  </button>
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="code">Parkcode</span>
+                    </div>
+                    <input type="text" className="form-control" aria-label="Default" aria-describedby="code" placeholder="ex. 'acad'" value={park} onChange={(e) => setPark(e.target.value)}/>
+                  </div>
+                </div>}
               </div>}
             </div>
             <div className="col-md-8">

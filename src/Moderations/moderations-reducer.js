@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createModerationThunk, findModerationsByParkThunk, findModerationsByRangerThunk } from "./moderations-thunks";
+import { createModerationThunk, findModerationsByParkThunk, findModerationsByRangerThunk, unmodThunk } from "./moderations-thunks";
 
 const initialState = {
   moderations: [],
@@ -28,6 +28,9 @@ const moderationsReducer = createSlice({
     },
     [createModerationThunk.fulfilled]: (state, action) => {
       state.moderations.push(action.payload);
+    },
+    [unmodThunk.fulfilled]: (state, action) => {
+      state.moderations = state.moderations.filter(m => m.ranger !== action.payload.username);
     }
   }
 });

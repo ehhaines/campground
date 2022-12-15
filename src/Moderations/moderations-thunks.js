@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createModeration, findModerationsByPark, findModerationsByRanger } from "./moderations-service";
+import { createModeration, findModerationsByPark, findModerationsByRanger, unmod } from "./moderations-service";
 
 export const findModerationsByParkThunk = createAsyncThunk(
   'findModerationsByPark',
@@ -14,4 +14,9 @@ export const findModerationsByRangerThunk = createAsyncThunk(
 export const createModerationThunk = createAsyncThunk(
   'createModeration',
   (moderation) => createModeration(moderation)
+);
+
+export const unmodThunk = createAsyncThunk(
+  'unmod',
+  (username) => unmod(username)
 );

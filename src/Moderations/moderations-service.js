@@ -16,3 +16,8 @@ export const createModeration = async (moderation) => {
   await axios.post(API_URL, moderation);
   return moderation;
 }
+
+export const unmod = async (username) => {
+  await axios.delete(`${API_URL}/${username}`);
+  return (username);
+}
