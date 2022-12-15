@@ -9,14 +9,18 @@ import LoadSVG from "../Spin-1s-200px.svg";
 import {useNavigate} from "react-router";
 import AllTrips from "../Trip/all-trips";
 import RelevantTripsComponent from "../Trip/all-trips";
+import { findFollowsByFollowerThunk, findFollowsByFollowingThunk } from "../Follows/follows-thunks";
 
 const ProfileComponent = () => {
     const {currentUser} = useSelector(state => state.users);
+    const {followers, following, followersLoading, followingLoading} = useSelector(state => state.follows);
 
     const dispatch = useDispatch();
     const nav = useNavigate();
     useEffect(() => {
-        dispatch(findAllTripsThunk())
+        dispatch(findAllTripsThunk());
+        dispatch(findFollowsByFollowerThunk(currentUser.username));
+        dispatch(findFollowsByFollowingThunk(currentUser.username));
     }, []);
     const handleLogout = () => {
         dispatch(logoutThunk())
@@ -65,7 +69,7 @@ const ProfileComponent = () => {
                 </div>
                 <p className="m-0 text-secondary">Email:{currentUser.email}</p>
                 <p className="m-0 text-secondary">Phone:{currentUser.phone}</p>
-                <div className="fw-bold">bio{currentUser.bio}</div>
+                <div className="text-secondary">bio: {currentUser.bio}</div>
                 <br></br>
                 <div>
 
@@ -75,9 +79,29 @@ const ProfileComponent = () => {
                     <br></br>
                     <span className="text-secondary">{currentUser.tripsPlanned}</span>
                     <br></br><br></br>
-                    <span className='fw-bold'>Friends</span>
+                    <span className='fw-bold'>Followers</span>
                     <br></br>
-                    <span className="text-secondary">{currentUser.friendsList}</span>
+                    <div className="mt-3">
+                        {!followersLoading && <ul className="list-group">
+                            {
+                                followers.map(f => 
+                                    <li className="list-group-item" style={{"cursor": "pointer"}} onClick={() => nav(`/profile/${f.follower}`)}>{f.follower}</li>
+                                )
+                            }
+                        </ul>}
+                    </div>
+                    <br></br><br></br>
+                    <span className='fw-bold'>Following</span>
+                    <br></br>
+                    <div className="mt-3">
+                        {!followingLoading && <ul className="list-group">
+                            {
+                                following.map(f => 
+                                    <li className="list-group-item" style={{"cursor": "pointer"}} onClick={() => nav(`/profile/${f.following}`)}>{f.following}</li>
+                                )
+                            }
+                        </ul>}
+                    </div>
                 </div>
                 <br></br>
                 <br></br>
