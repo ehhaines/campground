@@ -43,7 +43,7 @@ const EditProfile = () => {
             {currentUser &&
         <div>
         <div className="row margin-top">
-            <div className="float-start text-black fw-bold fs-4 ms-2">Edit Profile</div>
+            <div className="float-start text-black fw-bold fs-4">Edit Profile</div>
         </div>
 
             <div className="position-relative mt-2">
@@ -57,7 +57,7 @@ const EditProfile = () => {
                     <div className="col-8"></div>
                 </div>
                 <div>
-                    <input type="file" className="ms-4"/>
+                    <input type="file" className="ms-3"/>
                     <button className="text-secondary text-success border rounded-2">update profile picture</button>
                 </div>
             </div>
@@ -118,12 +118,12 @@ const EditProfile = () => {
             </form>
             <br></br>
             <div className="row mt-4">
-                <div className="col ms-2">
+                <div className="col ms-3">
                     <Link to="/profile">
                         <i className="btn btn-dark rounded-pill float-start">Cancel</i>
                     </Link>
                 </div>
-                <div className="col me-2">
+                <div className="col me-3">
                     <button
                         className="btn btn-dark rounded-pill float-end"
                         onClick={updateProfileHandler}
