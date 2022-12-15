@@ -17,7 +17,7 @@ const CompletedTripsComponent = (user) => {
 
   useEffect(() => {
     dispatch(findAllTripsThunk())
-  }, []);
+  }, [dispatch]);
 
   return(
     <div>

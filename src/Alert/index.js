@@ -10,13 +10,13 @@ import { findModerationsByRangerThunk } from "../Moderations/moderations-thunks"
 const AlertItem = ({alert}) => {
 
   const {currentUser} = useSelector(state => state.users);
-  const {moderations, moderationsLoading} = useSelector(state => state.moderations);
+  const {moderationsLoading} = useSelector(state => state.moderations);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(findModerationsByRangerThunk(alert.ranger));
-  }, []);
+  }, [dispatch, alert.ranger]);
 
   return(
     <div>

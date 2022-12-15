@@ -19,7 +19,7 @@ import ParkComponent from "./Park";
 // import parksReducer from "./Park/parks-reducer";
 // import reviewsReducer from "./Review/reviews-reducer";
 import NpsSearchResults from "./nps/Search/nps-search-results";
-import CurrentUser from "./Profile/current-user";
+// import CurrentUser from "./Profile/current-user";
 import {persistStore} from "redux-persist";
 import {PersistGate} from "redux-persist/integration/react";
 import AnonUserComponent from "./AnonProfile";

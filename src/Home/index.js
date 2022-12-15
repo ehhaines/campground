@@ -7,7 +7,7 @@ import "./home.css";
 
 const HomeComponent = () => {
 
-    const {trips, tripsLoading} = useSelector(state => state.trips);
+    const {trips} = useSelector(state => state.trips);
 
     const nav = useNavigate();
     const dispatch = useDispatch();
